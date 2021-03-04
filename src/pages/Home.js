@@ -1,12 +1,23 @@
 import React from 'react';
-import Fetch from '../components/Fetch';
+import styled from 'styled-components';
 
-const Home = () => {
+import Fetch from '../components/Fetch';
+import Timeline from '../components/Line';
+
+const Home = styled.div`
+  display: flex;
+  justify-content: center;
+  position: relative;
+  /* height: 100%; */
+`;
+
+const Homepage = () => {
   return (
-    <div>
+    <Home>
       <Fetch />
-    </div>
+      <Timeline />
+    </Home>
   );
 };
 
-export default Home;
+export default Homepage;

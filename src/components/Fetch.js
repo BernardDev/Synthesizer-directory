@@ -1,7 +1,19 @@
 import './Fetch.scss';
+import styled from 'styled-components';
 
 import React, {useState, useEffect} from 'react';
 import axios from 'axios';
+
+const Col = styled.div`
+  height: auto;
+  width: 100px;
+  background-color: red;
+`;
+
+const Img = styled.div`
+  position: absolute;
+  right: -20px;
+`;
 
 const Fetch = () => {
   const BASEURL =
@@ -24,16 +36,16 @@ const Fetch = () => {
     fetchData();
   }, []);
 
-  console.log('synths', synths);
+  // console.log('synths', synths);
   // console.log('data', data);
 
   return (
-    <div>
+    <Col>
       {synths.map((synth, index) => {
-        return <div key={index}> {<img key={index} src={synth.img} />}</div>;
+        return <Img key={index}> {<img key={index} src={synth.img} />}</Img>;
       })}
       <br />
-    </div>
+    </Col>
   );
 };
 
