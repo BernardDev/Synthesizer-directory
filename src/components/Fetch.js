@@ -11,8 +11,8 @@ const Col = styled.div`
 `;
 
 const Img = styled.div`
-  position: absolute;
-  right: -20px;
+  /* position: absolute;
+  right: -20px; */
 `;
 
 const Fetch = () => {
