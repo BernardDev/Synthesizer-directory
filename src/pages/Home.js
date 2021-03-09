@@ -41,7 +41,6 @@ const Homepage = () => {
 
   return (
     <Home>
-      {/* <Synth /> */}
       <Navigation query={query} handleSearch={handleSearch} />
       <Timeline>
         {synths.map((synth, index) => {

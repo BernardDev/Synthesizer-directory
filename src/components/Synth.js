@@ -1,7 +1,8 @@
 import React, {useState} from 'react';
 import styled, {keyframes, css} from 'styled-components';
 
-const Synth = ({reference, synth}) => {
+const Synth = ({reference, synth, count}) => {
+  console.log('count ', count, 'synth', synth);
   const [show, setShow] = useState(false);
 
   const intersectOptions = {
@@ -12,6 +13,7 @@ const Synth = ({reference, synth}) => {
     const intersection = new IntersectionObserver((entries) => {
       if (entries[0].isIntersecting) {
         setShow(true);
+        // if (intersection.current) intersection.current.disconnect();
       }
       console.log(
         entries[0].isIntersecting,
@@ -22,72 +24,20 @@ const Synth = ({reference, synth}) => {
     if (node) intersection.observe(node);
   };
 
-  // ---EXAMPLE---
-  // const wtf = (node) => {
-  //   const intersection = new IntersectionObserver((entries, intersection) => {
-  //     entries.forEach((entry) => {
-  //       if (!entry.isIntersecting) {
-  //         return;
-  //       } else {
-  //         setShow(true);
-  //         intersection.unobserve(entry.target);
-  //       }
-  //     });
-  //     // if (entries[0].isIntersecting) {
-  //     //   setShow(true);
-  //     // }
-  //     // console.log(entries[0].isIntersecting, 'ís dit er', synth.name);
-  //   }, intersectOptions);
-  //   if (node) intersection.observe(node);
-  // };
-
   return (
     <SynthContainer show={show}>
       <SynthItem show={show} ref={reference ? reference : wtf}>
-        {' '}
-        <p>{synth.name}</p>
-        {<Img src={synth.img} />}
+        <SynthName>{synth.name}</SynthName>
+        <Img src={synth.img} />
       </SynthItem>
     </SynthContainer>
   );
 };
 
-const cdBounce2 = keyframes`
-0% {
-  opacity: 0;
-  transform: translateX(-100px);
-}
-
-60% {
-  opacity: 1;
-  transform: translateX(20px);
-}
-
-100% {
-  transform: translateX(0);
-}
-`;
-
-const cdBounce2inverse = keyframes`
-0% {
-  opacity: 0;
-  transform: translateX(100px);
-}
-
-60% {
-  opacity: 1;
-  transform: translateX(-20px);
-}
-
-100% {
-  transform: translateX(0);
-}
-`;
-
 const appearLeft = keyframes`
 from {
   opacity: 0;
-  transform: translateX(-100px);
+  transform: translateX(-400px);
 }
 to {
   opacity: 1;
@@ -97,7 +47,7 @@ to {
 const appearRight = keyframes`
 from {
   opacity: 0;
-  transform: translateX(100px);
+  transform: translateX(400px);
 }
 to {
   opacity: 1;
@@ -106,17 +56,27 @@ to {
 // ---------
 
 const SynthItem = styled.div`
-  background-color: pink;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   flex-grow: 0;
+  width: 30vw;
+  margin: 0 15vw;
+`;
+
+const SynthName = styled.p`
+  text-align: center;
+  font-size: 0.6rem;
 `;
 
 const bounceAnimationLeft = css`
-  animation: ${appearLeft} 0.7s ease;
+  animation: ${appearLeft} 0.4s ease-out;
   animation-fill-mode: forwards;
 `;
 
 const bounceAnimationRight = css`
-  animation: ${appearRight} 0.7s ease;
+  animation: ${appearRight} 0.4s ease-out;
   animation-fill-mode: forwards;
 `;
 
@@ -125,8 +85,8 @@ const SynthContainer = styled.div`
   display: flex;
   justify-content: flex-end;
   position: relative;
-  width: 700px;
   margin-bottom: 10px;
+  width: 100vw;
   &:nth-child(even) {
     flex-direction: row-reverse;
     ${(props) => {
@@ -143,7 +103,7 @@ const SynthContainer = styled.div`
 
 const Img = styled.img`
   height: auto;
-  width: 300px;
+  width: 100%;
 `;
 
 export default Synth;

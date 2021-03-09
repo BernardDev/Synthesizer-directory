@@ -15,15 +15,14 @@ const Timeline = (props) => {
 const TimelineContainer = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
   position: relative;
   padding: 0;
 `;
 
 const Line = styled.div`
+  margin: 0 8rem;
   height: 100%;
-  left: 50%;
   position: absolute;
   width: 4px;
   background: purple;
