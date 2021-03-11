@@ -1,5 +1,7 @@
 import './App.css';
+import React from 'react';
 import Home from './pages/Home';
+// import styled from 'styled-components';
 
 function App() {
   return (
