@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import Options from '../components/Options';
 
 const Navigation = ({query, handleSearch}) => {
-  console.log('query', query);
   return (
     <NavigationContainer>
       <NavigationBar />
