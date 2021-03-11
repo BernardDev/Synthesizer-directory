@@ -25,7 +25,7 @@ const Line = styled.div`
   height: 100%;
   position: absolute;
   width: 4px;
-  background: purple;
+  background: #000;
 `;
 
 export default Timeline;

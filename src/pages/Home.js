@@ -12,13 +12,25 @@ import useFetch from '../hooks/useFetch';
 const Homepage = () => {
   const [query, setQuery] = useState();
   const [page, setPage] = useState(0);
+  const [trigger, setTrigger] = useState(false);
+
+  // useEffect(() => {
+  //   effect;
+  //   return () => {
+  //     cleanup;
+  //   };
+  // }, []);
+
+  // if yearProduced =
+
+  const handleTrigger = () => {
+    setTrigger(true);
+  };
 
   const handleSearch = (e) => {
     setQuery(e.target.value);
-    setPage(1);
+    setPage(0);
   };
-
-  // const myObserver = useRef();
 
   const {synths, hasMore, loading, error} = useFetch(query, page);
   const observer = useRef();
@@ -39,9 +51,12 @@ const Homepage = () => {
     [loading, hasMore]
   );
 
+  console.log('query', query);
+
   return (
     <Home>
       <Navigation query={query} handleSearch={handleSearch} />
+      {/* <NavigationSpacer /> */}
       <Timeline>
         {synths.map((synth, index) => {
           if (synths.length === index + 1) {
@@ -49,11 +64,21 @@ const Homepage = () => {
               <Synth
                 key={index}
                 synth={synth}
+                index={index}
                 reference={lastSynthElementRef}
+                loading={loading}
               />
             );
           } else {
-            return <Synth key={index} synth={synth} />;
+            // console.log('intex', index);
+            return (
+              <Synth
+                key={index}
+                synth={synth}
+                index={index}
+                trigger={trigger}
+              />
+            );
           }
         })}
         <Feedback loading={loading} error={error}>
@@ -71,5 +96,10 @@ const Home = styled.div`
   align-items: center;
   position: relative;
 `;
+
+// const NavigationSpacer = styled.div`
+//   height: 40px;
+//   display: block;
+// `;
 
 export default Homepage;

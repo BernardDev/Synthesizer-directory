@@ -19,8 +19,8 @@ const useFetch = (query, page) => {
       method: 'GET',
       url: 'https://synthesizer-api.herokuapp.com/api/synths',
       params: {
-        yearProduced: 1970 + page,
         manufacturer: query,
+        offset: 0,
         limit: 500,
         key: 'C6T2MA6-8B54BSG-GZKKV0F-MFKC1S1',
       },
@@ -32,7 +32,7 @@ const useFetch = (query, page) => {
         setSynths((prevSynths) => {
           return [...prevSynths, ...res.data.synths];
         });
-        setHasMore(res.data.synths.length > 0);
+        setHasMore(res.data.count.length > 0);
         setLoading(false);
         // console.log('data', res.data);
       })
