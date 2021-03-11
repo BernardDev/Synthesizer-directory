@@ -8,11 +8,11 @@ import Feedback from '../components/Feedback';
 import styled from 'styled-components';
 
 import useFetch from '../hooks/useFetch';
+import axios from 'axios';
 
 const Homepage = () => {
   const [query, setQuery] = useState();
   const [page, setPage] = useState(0);
-  const [trigger, setTrigger] = useState(false);
 
   // useEffect(() => {
   //   effect;
@@ -23,9 +23,15 @@ const Homepage = () => {
 
   // if yearProduced =
 
-  const handleTrigger = () => {
-    setTrigger(true);
-  };
+  // useEffect(() => {
+  //   axios({
+  //     method: 'GET',
+  //     url: 'https://synthesizer-api.herokuapp.com/api/manufacturers',
+  //   });
+  //   return () => {
+  //     cleanup;
+  //   };
+  // }, [input]);
 
   const handleSearch = (e) => {
     setQuery(e.target.value);
@@ -71,14 +77,7 @@ const Homepage = () => {
             );
           } else {
             // console.log('intex', index);
-            return (
-              <Synth
-                key={index}
-                synth={synth}
-                index={index}
-                trigger={trigger}
-              />
-            );
+            return <Synth key={index} synth={synth} index={index} />;
           }
         })}
         <Feedback loading={loading} error={error}>

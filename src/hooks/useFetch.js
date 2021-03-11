@@ -20,9 +20,9 @@ const useFetch = (query, page) => {
       url: 'https://synthesizer-api.herokuapp.com/api/synths',
       params: {
         manufacturer: query,
-        offset: 0,
-        limit: 500,
-        key: 'C6T2MA6-8B54BSG-GZKKV0F-MFKC1S1',
+        offset: 0 + 20 * page,
+        limit: 20,
+        key: `${process.env.REACT_APP_API_KEY}`,
       },
       cancelToken: new axios.CancelToken(
         (cancelToken) => (cancel = cancelToken)
@@ -32,7 +32,7 @@ const useFetch = (query, page) => {
         setSynths((prevSynths) => {
           return [...prevSynths, ...res.data.synths];
         });
-        setHasMore(res.data.count.length > 0);
+        setHasMore(synths.length + res.data.synths.length < res.data.count);
         setLoading(false);
         // console.log('data', res.data);
       })

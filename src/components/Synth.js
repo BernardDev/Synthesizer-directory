@@ -1,9 +1,8 @@
 import React, {useState, useCallback} from 'react';
 import styled, {keyframes, css} from 'styled-components';
 
-const Synth = ({reference, synth, trigger, index}) => {
+const Synth = ({reference, synth, index}) => {
   // console.log('count ', count, 'synth', synth);
-  console.log('trigger', trigger);
   const [show, setShow] = useState(false);
 
   const options = {
@@ -12,19 +11,16 @@ const Synth = ({reference, synth, trigger, index}) => {
 
   // als reference?
 
-  const lastElementOnPage = useCallback(
-    (node) => {
-      const observer = new IntersectionObserver((entries) => {
-        if (entries[0].isIntersecting) {
-          setShow(true);
-          observer.disconnect();
-          console.log(synth.name);
-        }
-      }, options);
-      if (node) observer.observe(node);
-    },
-    [trigger]
-  );
+  const lastElementOnPage = useCallback((node) => {
+    const observer = new IntersectionObserver((entries) => {
+      if (entries[0].isIntersecting) {
+        setShow(true);
+        observer.disconnect();
+        console.log(synth.name);
+      }
+    }, options);
+    if (node) observer.observe(node);
+  }, []);
 
   // let refFunction;
 
@@ -39,11 +35,11 @@ const Synth = ({reference, synth, trigger, index}) => {
   // last loaded element will not be watched by observer for animation?
   // console.log('synth', synth);
   return (
-    <SynthContainer show={show}>
+    <SynthContainer ref={reference ? reference : () => {}} show={show}>
       <Year even={index % 2 === 0}>
         <YearText>{synth.Specification.yearProduced}</YearText>
       </Year>
-      <SynthItem show={show} ref={reference ? reference : lastElementOnPage}>
+      <SynthItem show={show} ref={lastElementOnPage}>
         <SynthName>{synth.name}</SynthName>
         <Img src={synth.img} />
       </SynthItem>
@@ -94,7 +90,7 @@ const YearText = styled.p`
 const appearLeft = keyframes`
 from {
   opacity: 0;
-  transform: translateX(-50%);
+  transform: translateX(-25%);
 }
 to {
   opacity: 1;
@@ -104,7 +100,7 @@ to {
 const appearRight = keyframes`
 from {
   opacity: 0;
-  transform: translateX(50%);
+  transform: translateX(25%);
 }
 to {
   opacity: 1;
@@ -138,7 +134,7 @@ const bounceAnimationRight = css`
 `;
 
 const SynthContainer = styled.div`
-  opacity: 1;
+  opacity: 0;
   display: flex;
   justify-content: flex-end;
   position: relative;
