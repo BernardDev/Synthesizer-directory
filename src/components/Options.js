@@ -2,7 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 
 const Options = ({query, handleSearch}) => {
-  console.log('query', query);
   return (
     <OptionsContainer>
       <Field type='text' value={query} onChange={handleSearch} />
@@ -14,7 +13,6 @@ const OptionsContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  /* position: sticky; */
   top: 0px;
   height: 40px;
   width: 100%;

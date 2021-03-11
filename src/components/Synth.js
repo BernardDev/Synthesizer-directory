@@ -1,68 +1,35 @@
 import React, {useState, useCallback} from 'react';
 import styled, {keyframes, css} from 'styled-components';
 
-const Synth = ({reference, synth, trigger, index}) => {
-  // console.log('count ', count, 'synth', synth);
-  console.log('trigger', trigger);
+const Synth = ({reference, synth, index}) => {
+  const {name, img, Specification} = synth;
   const [show, setShow] = useState(false);
 
-  const options = {
-    threshold: 1,
-  };
+  const animationTrigger = useCallback((node) => {
+    const options = {
+      threshold: 1,
+    };
+    const observer = new IntersectionObserver(([lastElementOnPage]) => {
+      if (lastElementOnPage.isIntersecting) {
+        setShow(true);
+        observer.disconnect();
+      }
+    }, options);
+    if (node) observer.observe(node);
+  }, []);
 
-  // als reference?
-
-  const lastElementOnPage = useCallback(
-    (node) => {
-      const observer = new IntersectionObserver((entries) => {
-        if (entries[0].isIntersecting) {
-          setShow(true);
-          observer.disconnect();
-          console.log(synth.name);
-        }
-      }, options);
-      if (node) observer.observe(node);
-    },
-    [trigger]
-  );
-
-  // let refFunction;
-
-  // if (reference) {
-  //   refFunction = reference;
-  // } else if (observer.current !== null) {
-  //   refFunction = wtf;
-  // } else {
-  //   refFunction = () => console.log('fake ref');
-  // }
-
-  // last loaded element will not be watched by observer for animation?
-  // console.log('synth', synth);
   return (
-    <SynthContainer show={show}>
+    <SynthContainer ref={reference ? reference : () => {}} show={show}>
       <Year even={index % 2 === 0}>
-        <YearText>{synth.Specification.yearProduced}</YearText>
+        <YearText>{Specification.yearProduced}</YearText>
       </Year>
-      <SynthItem show={show} ref={reference ? reference : lastElementOnPage}>
-        <SynthName>{synth.name}</SynthName>
-        <Img src={synth.img} />
+      <SynthItem show={show} ref={animationTrigger}>
+        <SynthName>{name}</SynthName>
+        <Img src={img} />
       </SynthItem>
     </SynthContainer>
   );
 };
-
-// const Year = styled.div`
-//   font-size: 1rem;
-//   margin-left: -20px;
-//   position: absolute;
-//   top: 0;
-//   left: 50%;
-//   width: 50px;
-//   height: 50px;
-//   border-radius: 50%;
-//   color: #fff;
-//   background-color: #000;
-// `;
 
 const Year = styled.div`
   font-size: 1rem;
@@ -91,32 +58,7 @@ const YearText = styled.p`
   color: #fff;
 `;
 
-const appearLeft = keyframes`
-from {
-  opacity: 0;
-  transform: translateX(-50%);
-}
-to {
-  opacity: 1;
-  transform: translateX(0px);
-}`;
-
-const appearRight = keyframes`
-from {
-  opacity: 0;
-  transform: translateX(50%);
-}
-to {
-  opacity: 1;
-  transform: translateX(0px);
-}`;
-// ---------
-
 const SynthItem = styled.div`
-  /* display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center; */
   flex-grow: 0;
   width: 30vw;
   margin: 0 15vw;
@@ -126,6 +68,26 @@ const SynthName = styled.p`
   text-align: center;
   font-size: 1rem;
 `;
+
+const appearLeft = keyframes`
+from {
+  opacity: 0;
+  transform: translateX(-25%);
+}
+to {
+  opacity: 1;
+  transform: translateX(0px);
+}`;
+
+const appearRight = keyframes`
+from {
+  opacity: 0;
+  transform: translateX(25%);
+}
+to {
+  opacity: 1;
+  transform: translateX(0px);
+}`;
 
 const bounceAnimationLeft = css`
   animation: ${appearLeft} 0.4s ease-out;
@@ -138,7 +100,7 @@ const bounceAnimationRight = css`
 `;
 
 const SynthContainer = styled.div`
-  opacity: 1;
+  opacity: 0;
   display: flex;
   justify-content: flex-end;
   position: relative;

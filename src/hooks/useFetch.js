@@ -1,6 +1,8 @@
 import {useState, useEffect} from 'react';
 import axios from 'axios';
 
+const PAGINATION_LIMIT = 20;
+
 const useFetch = (query, page) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
@@ -17,12 +19,12 @@ const useFetch = (query, page) => {
     let cancel;
     axios({
       method: 'GET',
-      url: 'https://synthesizer-api.herokuapp.com/api/synths',
+      url: `${process.env.REACT_APP_API_URL}`,
       params: {
         manufacturer: query,
-        offset: 0,
-        limit: 500,
-        key: 'C6T2MA6-8B54BSG-GZKKV0F-MFKC1S1',
+        offset: 0 + PAGINATION_LIMIT * page,
+        limit: PAGINATION_LIMIT,
+        key: `${process.env.REACT_APP_API_KEY}`,
       },
       cancelToken: new axios.CancelToken(
         (cancelToken) => (cancel = cancelToken)
@@ -30,11 +32,12 @@ const useFetch = (query, page) => {
     })
       .then((res) => {
         setSynths((prevSynths) => {
+          setHasMore(
+            prevSynths.length + res.data.synths.length < res.data.count
+          );
           return [...prevSynths, ...res.data.synths];
         });
-        setHasMore(res.data.count.length > 0);
         setLoading(false);
-        // console.log('data', res.data);
       })
       .catch((e) => {
         if (axios.isCancel(e)) return;
