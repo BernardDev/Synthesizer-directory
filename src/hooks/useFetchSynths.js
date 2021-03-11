@@ -3,11 +3,13 @@ import axios from 'axios';
 
 const PAGINATION_LIMIT = 20;
 
-const useFetch = (query, page) => {
+const useFetchSynths = (query, page) => {
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(false);
+  const [error, setError] = useState();
   const [synths, setSynths] = useState([]);
   const [hasMore, setHasMore] = useState(false);
+
+  console.log('error from usehook', error);
 
   useEffect(() => {
     setSynths([]);
@@ -15,13 +17,13 @@ const useFetch = (query, page) => {
 
   useEffect(() => {
     setLoading(true);
-    setError(false);
+    setError(null);
     let cancel;
     axios({
       method: 'GET',
       url: `${process.env.REACT_APP_API_URL}`,
       params: {
-        manufacturer: query,
+        manufacturer: query?.length >= 2 ? query : null,
         offset: 0 + PAGINATION_LIMIT * page,
         limit: PAGINATION_LIMIT,
         key: `${process.env.REACT_APP_API_KEY}`,
@@ -39,13 +41,18 @@ const useFetch = (query, page) => {
         });
         setLoading(false);
       })
-      .catch((e) => {
-        if (axios.isCancel(e)) return;
-        setError(true);
+      .catch((error) => {
+        if (axios.isCancel(error)) return;
+        console.log('error from inside function', error.response);
+        setError({
+          status: error.response.status,
+          text: error.response.statusText,
+        });
       });
+
     return () => cancel();
   }, [query, page]);
   return {loading, error, synths, hasMore};
 };
 
-export default useFetch;
+export default useFetchSynths;
