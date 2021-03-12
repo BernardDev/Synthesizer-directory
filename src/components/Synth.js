@@ -1,8 +1,9 @@
 import React, {useState, useCallback} from 'react';
 import styled, {keyframes, css} from 'styled-components';
+import {Link} from 'react-router-dom';
 
 const Synth = ({reference, synth, index}) => {
-  const {name, img, Specification} = synth;
+  const {name, img, Specification, id} = synth;
   const [show, setShow] = useState(false);
 
   const animationTrigger = useCallback((node) => {
@@ -24,8 +25,10 @@ const Synth = ({reference, synth, index}) => {
         <YearText>{Specification.yearProduced}</YearText>
       </Year>
       <SynthItem show={show} ref={animationTrigger}>
-        <SynthName>{name}</SynthName>
-        <Img src={img} />
+        <Link to={`/${id}`}>
+          <SynthName>{name}</SynthName>
+          <Img src={img} />
+        </Link>
       </SynthItem>
     </SynthContainer>
   );
