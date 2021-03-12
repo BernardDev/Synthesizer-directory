@@ -7,7 +7,7 @@ const useFetchManufacturers = () => {
   useEffect(() => {
     axios({
       method: 'GET',
-      url: 'https://synthesizer-api.herokuapp.com/api/manufacturers',
+      url: `${process.env.REACT_APP_API_URL}/manufacturers`,
       params: {
         offset: 0,
         limit: 500,
@@ -17,11 +17,11 @@ const useFetchManufacturers = () => {
       .then((res) => {
         setManufacturers(res.data.manufacturers);
       })
-      .catch((e) => {
-        console.log('error', e);
+      .catch((error) => {
+        console.log('error', error);
+        // @todo: return error.response
       });
   }, []);
-  // console.log('manufacturers', manufacturers);
 
   return manufacturers;
 };

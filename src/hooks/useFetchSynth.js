@@ -3,15 +3,15 @@ import {useParams} from 'react-router-dom';
 import axios from 'axios';
 
 const useFetchManufacturers = () => {
-  const params = useParams();
   const [synth, setSynth] = useState({});
+  const params = useParams();
 
   console.log('params', params);
 
   useEffect(() => {
     axios({
       method: 'GET',
-      url: `https://synthesizer-api.herokuapp.com/api/synths/${params.synth_id}`,
+      url: `${process.env.REACT_APP_API_URL}/synths/${params.synth_id}`,
       params: {
         key: `${process.env.REACT_APP_API_KEY}`,
       },
@@ -19,8 +19,9 @@ const useFetchManufacturers = () => {
       .then((res) => {
         setSynth(res.data);
       })
-      .catch((e) => {
-        console.log('error', e);
+      .catch((error) => {
+        console.log('error', error);
+        // @todo: return error.response
       });
   }, [params.synth_id]);
   return synth;

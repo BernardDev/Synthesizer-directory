@@ -1,13 +1,10 @@
 import React, {useState, useCallback} from 'react';
-// import Details from '../pages/Details';
 import styled, {keyframes, css} from 'styled-components';
 import {Link} from 'react-router-dom';
 
 const Synth = ({reference, synth, index}) => {
   const {name, img, Specification, id} = synth;
   const [show, setShow] = useState(false);
-
-  // console.log('Specification from synths', Specification);
 
   const animationTrigger = useCallback((node) => {
     const options = {
@@ -22,11 +19,6 @@ const Synth = ({reference, synth, index}) => {
     if (node) observer.observe(node);
   }, []);
 
-  // <Link to={`/movies/${movie.imdbID}`}>
-  //   <p> {movie.Title} </p>;
-  //   <img src={movie.Poster} alt={movie.Title} />
-  // </Link>;
-
   return (
     <SynthContainer ref={reference ? reference : () => {}} show={show}>
       <Year even={index % 2 === 0}>
@@ -37,7 +29,6 @@ const Synth = ({reference, synth, index}) => {
           <SynthName>{name}</SynthName>
           <Img src={img} />
         </Link>
-        {/* <Details name={name} img={img} specification={Specification} /> */}
       </SynthItem>
     </SynthContainer>
   );

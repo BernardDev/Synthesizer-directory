@@ -52,7 +52,6 @@ const Homepage = () => {
       {error ? (
         <Frame>
           <Feedback loading={loading} error={error} />
-          {/* <Spinner width={400} loading={loading} /> */}
         </Frame>
       ) : (
         <>

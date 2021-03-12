@@ -9,38 +9,17 @@ const useFetchSynths = (query, page, manufacturers) => {
   const [synths, setSynths] = useState([]);
   const [hasMore, setHasMore] = useState(false);
 
-  // console.log('manufacturers', manufacturers);
-
   useEffect(() => {
     setSynths([]);
   }, [query]);
 
-  // why on mount undefined
-  // why Access not found (false)
-
   useEffect(() => {
     setLoading(true);
     setError(null);
-    let exactMatch = manufacturers?.some((manufacturer) => {
-      return manufacturer.manufacturer === query; // accepted values: Yamaha, Ya
-    });
-    let partialMatch = manufacturers?.some((manufacturer) => {
-      return manufacturer.manufacturer?.startsWith(query); // accepted values: Yamaha, Ya
-    });
-    console.log(
-      'exactMatch',
-      exactMatch,
-      'query',
-      query,
-      'exactMatch === false',
-      exactMatch === false,
-      'partial match',
-      partialMatch
-    );
-    // handle undefined value of found on mount // works for now, just fetch
-    // geen query // works for now
-    // query no match //
-    if (exactMatch === false && query !== '' && query !== undefined) {
+    let exactMatch = hasExactMatch(manufacturers, query);
+    let partialMatch = hasPartialMatch(manufacturers, query);
+    const queryPresent = isQueryPresent(query);
+    if (exactMatch === false && queryPresent) {
       setLoading(false);
       if (!partialMatch) {
         setError({text: `${query} is not in our database, sorry ;)`});
@@ -50,7 +29,7 @@ const useFetchSynths = (query, page, manufacturers) => {
     let cancel;
     axios({
       method: 'GET',
-      url: `${process.env.REACT_APP_API_URL}`,
+      url: `${process.env.REACT_APP_API_URL}/synths`,
       params: {
         manufacturer: query?.length >= 2 ? query : null,
         offset: 0 + PAGINATION_LIMIT * page,
@@ -61,26 +40,52 @@ const useFetchSynths = (query, page, manufacturers) => {
         (cancelToken) => (cancel = cancelToken)
       ),
     })
-      .then((res) => {
-        setSynths((prevSynths) => {
-          setHasMore(
-            prevSynths.length + res.data.synths.length < res.data.count
-          );
-          return [...prevSynths, ...res.data.synths];
-        });
-        setLoading(false);
-      })
-      .catch((error) => {
-        if (axios.isCancel(error)) return;
-        console.log('error from inside function', error.response);
-        setError({
-          status: error.response.status,
-          text: error.response.statusText,
-        });
-      });
-    return () => cancel();
-  }, [query, page]);
+      .then(updateStates(setSynths, setHasMore, setLoading))
+      .catch(handleError(setError));
+    // cancel previous request if new request is made while fetching
+    return cancelRequest(cancel);
+  }, [query, page, manufacturers]);
   return {loading, error, synths, hasMore};
 };
+
+function cancelRequest(cancelToken) {
+  cancelToken();
+}
+
+function handleError(setError) {
+  return (error) => {
+    if (axios.isCancel(error)) return;
+    setError({
+      status: error.response.status,
+      text: error.response.statusText,
+    });
+  };
+}
+
+function updateStates(setSynths, setHasMore, setLoading) {
+  return (res) => {
+    setSynths((prevSynths) => {
+      setHasMore(prevSynths.length + res.data.synths.length < res.data.count);
+      return [...prevSynths, ...res.data.synths];
+    });
+    setLoading(false);
+  };
+}
+
+function isQueryPresent(query) {
+  return query !== '' && query !== undefined;
+}
+
+function hasPartialMatch(manufacturers, query) {
+  return manufacturers?.some((manufacturer) => {
+    return manufacturer.manufacturer?.startsWith(query);
+  });
+}
+
+function hasExactMatch(manufacturers, query) {
+  return manufacturers?.some((manufacturer) => {
+    return manufacturer.manufacturer === query;
+  });
+}
 
 export default useFetchSynths;
