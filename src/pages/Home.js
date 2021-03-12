@@ -6,17 +6,24 @@ import Synth from '../components/Synth';
 import Feedback from '../components/Feedback';
 import Spinner from '../components/Spinner';
 import styled from 'styled-components';
+import useFetchManufacturers from '../hooks/useFetchManufacturers';
 
 const Homepage = () => {
-  const [query, setQuery] = useState();
   const [page, setPage] = useState(0);
-  const {synths, hasMore, loading, error} = useFetchSynths(query, page);
-  const observer = useRef();
+  const [query, setQuery] = useState();
+  const manufacturers = useFetchManufacturers();
+  const {synths, hasMore, loading, error} = useFetchSynths(
+    query,
+    page,
+    manufacturers
+  );
 
   const handleSearch = (e) => {
     setQuery(e.target.value);
     setPage(0);
   };
+
+  const observer = useRef();
 
   const paginationTrigger = useCallback(
     (node) => {
@@ -37,29 +44,40 @@ const Homepage = () => {
 
   return (
     <Home>
-      <Navigation query={query} handleSearch={handleSearch} />
-      {loading || error ? (
+      <Navigation
+        query={query}
+        handleSearch={handleSearch}
+        manufacturers={manufacturers}
+      />
+      {error ? (
         <Frame>
-          <Spinner width={400} loading={loading} />
           <Feedback loading={loading} error={error} />
+          {/* <Spinner width={400} loading={loading} /> */}
         </Frame>
       ) : (
-        <Timeline>
-          {synths.map((synth, index) => {
-            const isLastSynthesizer = synths.length === index + 1;
-            return isLastSynthesizer ? (
-              <Synth
-                key={index}
-                synth={synth}
-                index={index}
-                reference={paginationTrigger}
-                loading={loading}
-              />
-            ) : (
-              <Synth key={index} synth={synth} index={index} />
-            );
-          })}
-        </Timeline>
+        <>
+          <Timeline>
+            {synths.map((synth, index) => {
+              const isLastSynthesizer = synths.length === index + 1;
+              return isLastSynthesizer ? (
+                <Synth
+                  key={index}
+                  synth={synth}
+                  index={index}
+                  reference={paginationTrigger}
+                  loading={loading}
+                />
+              ) : (
+                <Synth key={index} synth={synth} index={index} />
+              );
+            })}
+          </Timeline>
+          {loading && (
+            <Frame>
+              <Spinner width={400} loading={loading} />{' '}
+            </Frame>
+          )}
+        </>
       )}
     </Home>
   );
@@ -72,7 +90,7 @@ const Frame = styled.div`
   align-items: center;
   width: 100vw;
   height: 100vh;
-  /* background-color: pink; */
+  background-color: rgba(0, 0, 0, 0);
 `;
 
 const Home = styled.div`

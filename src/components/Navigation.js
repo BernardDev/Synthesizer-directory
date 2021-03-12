@@ -2,11 +2,15 @@ import React from 'react';
 import styled from 'styled-components';
 import Options from '../components/Options';
 
-const Navigation = ({query, handleSearch}) => {
+const Navigation = ({query, handleSearch, manufacturers}) => {
   return (
     <NavigationContainer>
       <NavigationBar />
-      <Options query={query} handleSearch={handleSearch} />
+      <Options
+        query={query}
+        handleSearch={handleSearch}
+        manufacturers={manufacturers}
+      />
     </NavigationContainer>
   );
 };

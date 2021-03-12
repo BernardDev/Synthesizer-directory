@@ -1,10 +1,9 @@
 import React from 'react';
-import useFetchManufacturers from '../hooks/useFetchManufacturers';
+// import useFetchManufacturers from '../hooks/useFetchManufacturers';
 import styled from 'styled-components';
 
-const Options = ({query, handleSearch}) => {
-  const manufacturers = useFetchManufacturers();
-
+const Options = ({query, handleSearch, manufacturers}) => {
+  // console.log('manufacturers', manufacturers);
   return (
     <OptionsContainer>
       <Field type='text' list='data' value={query} onChange={handleSearch} />

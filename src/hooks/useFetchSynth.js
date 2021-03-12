@@ -1,29 +1,29 @@
 import {useState, useEffect} from 'react';
+import {useParams} from 'react-router-dom';
 import axios from 'axios';
 
 const useFetchManufacturers = () => {
-  const [manufacturers, setManufacturers] = useState();
+  const params = useParams();
+  const [synth, setSynth] = useState({});
+
+  console.log('params', params);
 
   useEffect(() => {
     axios({
       method: 'GET',
-      url: 'https://synthesizer-api.herokuapp.com/api/manufacturers',
+      url: `https://synthesizer-api.herokuapp.com/api/synths/${params.synth_id}`,
       params: {
-        offset: 0,
-        limit: 500,
         key: `${process.env.REACT_APP_API_KEY}`,
       },
     })
       .then((res) => {
-        setManufacturers(res.data.manufacturers);
+        setSynth(res.data);
       })
       .catch((e) => {
         console.log('error', e);
       });
-  }, []);
-  // console.log('manufacturers', manufacturers);
-
-  return manufacturers;
+  }, [params.synth_id]);
+  return synth;
 };
 
 export default useFetchManufacturers;
