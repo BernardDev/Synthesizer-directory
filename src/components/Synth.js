@@ -25,10 +25,8 @@ const Synth = ({reference, synth, index}) => {
         <YearText>{Specification.yearProduced}</YearText>
       </Year>
       <SynthItem show={show} ref={animationTrigger}>
-        <Link to={`/${id}`}>
-          <SynthName>{name}</SynthName>
-          <Img src={img} />
-        </Link>
+        <SynthName>{name}</SynthName>
+        <Img src={img} />
       </SynthItem>
     </SynthContainer>
   );

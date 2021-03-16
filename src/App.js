@@ -1,6 +1,6 @@
 import React from 'react';
 import Home from './pages/Home';
-import Details from './pages/Details';
+import Contribute from './pages/Contribute';
 import {Switch, Route} from 'react-router-dom';
 
 function App() {
@@ -10,8 +10,8 @@ function App() {
         <Route exact path='/'>
           <Home />
         </Route>
-        <Route path='/:synth_id'>
-          <Details />
+        <Route path='/contribute'>
+          <Contribute />
         </Route>
       </Switch>
     </div>

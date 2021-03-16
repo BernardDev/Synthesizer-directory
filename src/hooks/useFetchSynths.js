@@ -29,7 +29,7 @@ const useFetchSynths = (query, page, manufacturers) => {
     let cancel;
     axios({
       method: 'GET',
-      url: `${process.env.REACT_APP_API_URL}/synths`,
+      url: `${process.env.REACT_APP_API_URL}/api/synths`,
       params: {
         manufacturer: query?.length >= 2 ? query : null,
         offset: 0 + PAGINATION_LIMIT * page,
@@ -43,7 +43,7 @@ const useFetchSynths = (query, page, manufacturers) => {
       .then(updateStates(setSynths, setHasMore, setLoading))
       .catch(handleError(setError));
     // cancel previous request if new request is made while fetching
-    return cancelRequest(cancel);
+    return () => cancelRequest(cancel);
   }, [query, page, manufacturers]);
   return {loading, error, synths, hasMore};
 };

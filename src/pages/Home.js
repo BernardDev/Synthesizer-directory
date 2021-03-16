@@ -7,6 +7,7 @@ import Feedback from '../components/Feedback';
 import Spinner from '../components/Spinner';
 import styled from 'styled-components';
 import useFetchManufacturers from '../hooks/useFetchManufacturers';
+import Options from '../components/Options';
 
 const Homepage = () => {
   const [page, setPage] = useState(0);
@@ -45,6 +46,11 @@ const Homepage = () => {
   return (
     <Home>
       <Navigation
+        query={query}
+        handleSearch={handleSearch}
+        manufacturers={manufacturers}
+      />
+      <Options
         query={query}
         handleSearch={handleSearch}
         manufacturers={manufacturers}
