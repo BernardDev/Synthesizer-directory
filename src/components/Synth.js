@@ -1,6 +1,5 @@
 import React, {useState, useCallback} from 'react';
 import styled, {keyframes, css} from 'styled-components';
-import {Link} from 'react-router-dom';
 
 const Synth = ({reference, synth, index}) => {
   const {name, img, Specification, id} = synth;

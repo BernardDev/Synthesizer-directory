@@ -6,8 +6,6 @@ const useFetchManufacturers = () => {
   const [synth, setSynth] = useState({});
   const params = useParams();
 
-  console.log('params', params);
-
   useEffect(() => {
     axios({
       method: 'GET',

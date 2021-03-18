@@ -1,10 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import {NavLink} from 'react-router-dom';
-
-{
-  /* <NavLink to={url}>{title}</NavLink>; */
-}
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import {faUser} from '@fortawesome/free-solid-svg-icons';
 
 const Navigation = ({query, handleSearch, manufacturers}) => {
   return (
@@ -19,6 +17,9 @@ const Navigation = ({query, handleSearch, manufacturers}) => {
           </StyledLink>
           <StyledLink>
             <NavLink to={'/'}>Home</NavLink>
+          </StyledLink>
+          <StyledLink>
+            <FontAwesomeIcon icon={faUser} size='lg' transform='' />
           </StyledLink>
         </StyledNavLinkContainer>
       </NavigationBar>
@@ -62,7 +63,6 @@ const StyledLink = styled.p`
 
 const NavigationBar = styled.div`
   display: flex;
-  /* justify-content: space-between; */
   align-items: center;
   background-color: green;
   height: 50px;
