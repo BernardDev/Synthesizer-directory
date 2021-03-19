@@ -19,7 +19,9 @@ const Navigation = ({query, handleSearch, manufacturers}) => {
             <NavLink to={'/'}>Home</NavLink>
           </StyledLink>
           <StyledLink>
-            <FontAwesomeIcon icon={faUser} size='lg' transform='' />
+            <NavLink to={'/admin'}>
+              <FontAwesomeIcon icon={faUser} size='lg' transform='' />
+            </NavLink>
           </StyledLink>
         </StyledNavLinkContainer>
       </NavigationBar>
