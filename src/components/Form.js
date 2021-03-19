@@ -10,13 +10,15 @@ import {FlexColumn} from './styles/componentStyles';
 
 const Form = () => {
   const [fileName, setFileName] = useState('Upload a Photo');
-  // const [response, setResponse] = useState({message: '', error: [], data: {}});
+  const [response, setResponse] = useState('');
   const {register, handleSubmit, watch, errors} = useForm({
     resolver: yupResolver(suggestionSchema),
   });
 
   const onSubmit = async (data) => {
-    const formData = formatToFormData(data);
+    setResponse('');
+    const formData = new FormData();
+    formatFormData(data, formData);
     try {
       const res = await axios.post(
         `${process.env.REACT_APP_API_URL}/contribute`,
@@ -27,10 +29,9 @@ const Form = () => {
           },
         }
       );
-      // console.log(`res`, res);
-      // setResponse(res.data.message);
+      setResponse(res.data.message);
     } catch (error) {
-      // setResponse(error.response.message);
+      setResponse(error.response.statusText);
     }
   };
 
@@ -105,6 +106,7 @@ const Form = () => {
       <FlexColumn>
         <StyledSubmit type='submit' />
       </FlexColumn>
+      {response && <p>{response}</p>}
     </StyledForm>
   );
 };
@@ -148,14 +150,22 @@ const StyledLabel = styled.label`
 
 export default Form;
 
-function formatToFormData(data) {
-  const formData = new FormData();
+function formatFormData(data, formData) {
+  // formData.append('polyphony', data.polyphony);
+  // formData.append('keyboard', data.keyboard);
+  // formData.append('control', data.control);
+  // formData.append('yearProduced', data.yearProduced);
+  // formData.append('memory', data.memory);
+  // formData.append('oscillators', data.oscillators);
+  // formData.append('filter', data.filter);
+  // formData.append('lfo', data.lfo);
+  // formData.append('effects', data.effects);
+  // formData.append('manufacturer', data.manufacturer);
+  // formData.append('name', data.name);
+  // formData.append('image', data.image[0]);
   Object.keys(data).forEach((key) => {
-    if (key === 'image') {
-      formData.append('image', data.image[0]);
-    } else {
-      formData.append(key, data[key]);
-    }
+    formData.append(key, data[key]);
   });
-  return formData;
+  delete formData.image;
+  formData.append('image', data.image[0]);
 }

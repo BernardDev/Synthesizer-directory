@@ -50,10 +50,7 @@ const StyledUploadButton = styled.div`
 
 const StyleIconContainer = styled.span`
   position: absolute;
-  /* padding-top: 100px; */
   transform-origin: center;
-  /* top: 30%; */
   right: 20px;
   z-index: 2;
-  /* padding-left: 20px; */
 `;

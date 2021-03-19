@@ -35,7 +35,6 @@ label {
 
 label {
   cursor: pointer;
-  /* display: inline-block; */
   position: relative;
   margin: 0;
   box-sizing: border-box;
@@ -43,6 +42,5 @@ label {
   justify-self: inline-flex;
   justify-content: center;
   align-items: center;
-  /* margin: 15px; */
   padding: 15px;
 }
