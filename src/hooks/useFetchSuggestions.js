@@ -1,14 +1,17 @@
 import {useState, useEffect} from 'react';
 import axios from 'axios';
 
-const PAGINATION_LIMIT = 2;
+const PAGINATION_LIMIT = 500;
 
 const useFetchSuggestions = (page) => {
   const [suggestions, setSuggestions] = useState();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState();
+  const [hasMore, setHasMore] = useState(true);
 
-  //   const [hasMore, setHasMore] = useState(false);
+  //   setHasMore(prevSynths.length + res.data.synths.length < res.data.count);
+  //   return [...prevSynths, ...res.data.synths];
+  // });
 
   useEffect(() => {
     console.log('do i get here');
@@ -23,8 +26,16 @@ const useFetchSuggestions = (page) => {
       },
     })
       .then((res) => {
+        // console.log(`hasMore deep in`, hasMore);
         setSuggestions(res.data.suggestions);
+        console.log(`suggestions deep in`, suggestions);
         setLoading(false);
+        setHasMore((prevSuggestions) => {
+          return (
+            prevSuggestions.length + res.data.suggestions.length <
+            res.data.count
+          );
+        });
       })
       .catch((error) => {
         console.log(`error`, error);
