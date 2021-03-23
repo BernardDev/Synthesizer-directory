@@ -1,10 +1,8 @@
-import React from 'react';
+import React, {useState} from 'react';
 import styled from 'styled-components';
 
-const Suggestion = ({suggestion, loading, decline, accept}) => {
-  // console.log(`suggestion`, suggestion);
-  // console.log(`suggestion`, suggestion);
-  // console.log(`loading`, loading);
+const Suggestion = ({suggestion, loading, decline, accept, displayError}) => {
+  // const [feedback, setFeedback] = useState('messaging');
 
   const handleAccept = () => {
     accept(suggestion.id);
@@ -31,6 +29,7 @@ const Suggestion = ({suggestion, loading, decline, accept}) => {
         <div>{suggestion?.filter}</div>
         <div>{suggestion?.lfo}</div>
         <div>{suggestion?.effects}</div>
+        {/* <div>{feedback}</div> */}
       </StyledInfo>
       <StyledButtonContainer>
         <button onClick={handleAccept}>Accept</button>

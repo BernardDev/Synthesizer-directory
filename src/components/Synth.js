@@ -2,7 +2,7 @@ import React, {useState, useCallback} from 'react';
 import styled, {keyframes, css} from 'styled-components';
 
 const Synth = ({reference, synth, index}) => {
-  const {name, img, Specification, id} = synth;
+  const {name, img, Specification} = synth;
   const [show, setShow] = useState(false);
 
   const animationTrigger = useCallback((node) => {

@@ -14,7 +14,6 @@ const useFetchSuggestions = (page) => {
   // });
 
   useEffect(() => {
-    console.log('do i get here');
     setLoading(true);
     setError(null);
     axios({
@@ -28,7 +27,6 @@ const useFetchSuggestions = (page) => {
       .then((res) => {
         // console.log(`hasMore deep in`, hasMore);
         setSuggestions(res.data.suggestions);
-        console.log(`suggestions deep in`, suggestions);
         setLoading(false);
         setHasMore((prevSuggestions) => {
           return (

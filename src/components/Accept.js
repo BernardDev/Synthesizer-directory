@@ -9,58 +9,34 @@ const Form = () => {
   const [page, setPage] = useState(0);
   const {suggestions, loading, hasMore, error} = useFetchSuggestions(page);
 
-  // useEffect(() => {
-  //   setAllSuggestions(suggestions);
-  // }, [suggestions]);
+  const [displaySuggestions, setDisplaySuggestions] = useState(suggestions);
+  const [displayError, setDisplayError] = useState();
 
-  // const [allSuggestions, setAllSuggestions] = useState();
-  // console.log(`suggestions`, suggestions);
+  useEffect(() => {
+    setDisplaySuggestions(suggestions);
+  }, [suggestions]);
 
-  // get id from every suggestion
-
-  const decline = (id) => {
-    console.log(`id decline`, id);
-    // const newSuggestions = allSuggestions.map((suggestion) => {
-    //   if (suggestion.id === id) {
-    //     // axios post request
-    //     // delete this item from allSuggestions array
-    //   } else {
-    //     return suggestion;
-    //   }
-    // });
-    // setAllSuggestions(newSuggestions);
-  };
+  // console.log(`displaySuggestions`, displaySuggestions);
 
   const accept = async (id) => {
-    console.log(`id accept`, id);
     const response = await acceptSuggestion(id);
-    console.log(`response`, response);
-    // const newSuggestions = allSuggestions.map((suggestion) => {
-    //   if (suggestion.id === id) {
-    //     const result = useAcceptSuggestion(suggestion);
-    //     // axios post request
-    //     // delete this item from allSuggestions array
-    //   } else {
-    //     return suggestion;
-    //   }
-    // });
-    // setAllSuggestions(newSuggestions);
+    if (response.data.data) {
+      const newSuggestions = displaySuggestions.filter((suggestion) => {
+        return suggestion.id !== id;
+      });
+      setDisplaySuggestions(newSuggestions);
+    }
+    setDisplayError(response.data.message);
+    // show error message
+    // setError()
   };
 
-  // const decline = (id) => {
-  //   console.log('Called!', id);
-  //   const newSuggestionArray = suggestions.map((suggestion) => {
-  //     if (suggestion.id === id) {
-  //       return {
-  //         ...suggestion,
-  //         score: player.score + 1,
-  //       };
-  //     } else {
-  //       return suggestion;
-  //     }
-  //   });
-  //   set_players(new_players_array);
-  // };
+  const decline = (id) => {
+    const newSuggestions = displaySuggestions.filter((suggestion) => {
+      return suggestion.id !== id;
+    });
+    setDisplaySuggestions(newSuggestions);
+  };
 
   function handlePageUp() {
     // if (!hasMore) return;
@@ -75,7 +51,7 @@ const Form = () => {
   return (
     <div>
       <SuggestionContainer>
-        {suggestions?.map((suggestion, index) => {
+        {displaySuggestions?.map((suggestion, index) => {
           return (
             <Suggestion
               suggestion={suggestion}
@@ -83,6 +59,7 @@ const Form = () => {
               key={index}
               decline={decline}
               accept={accept}
+              displayError={displayError}
             />
           );
         })}

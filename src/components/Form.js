@@ -11,7 +11,7 @@ import {FlexColumn} from './styles/componentStyles';
 const Form = () => {
   const [fileName, setFileName] = useState('Upload a Photo');
   const [response, setResponse] = useState('');
-  const {register, handleSubmit, watch, errors} = useForm({
+  const {register, handleSubmit, errors} = useForm({
     resolver: yupResolver(suggestionSchema),
   });
 
