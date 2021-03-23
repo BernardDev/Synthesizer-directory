@@ -1,7 +1,8 @@
 import React, {useState} from 'react';
 import styled from 'styled-components';
 
-const Suggestion = ({suggestion, loading, decline, accept, displayError}) => {
+const Suggestion = ({suggestion, loading, decline, accept, error}) => {
+  console.log(`suggestio.error`, suggestion.message);
   // const [feedback, setFeedback] = useState('messaging');
 
   const handleAccept = () => {
@@ -29,7 +30,7 @@ const Suggestion = ({suggestion, loading, decline, accept, displayError}) => {
         <div>{suggestion?.filter}</div>
         <div>{suggestion?.lfo}</div>
         <div>{suggestion?.effects}</div>
-        {/* <div>{feedback}</div> */}
+        <div>{suggestion.message}</div>
       </StyledInfo>
       <StyledButtonContainer>
         <button onClick={handleAccept}>Accept</button>

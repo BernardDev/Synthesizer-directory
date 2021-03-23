@@ -7,35 +7,17 @@ import acceptSuggestion from '../services/acceptSuggestion';
 
 const Form = () => {
   const [page, setPage] = useState(0);
-  const {suggestions, loading, hasMore, error} = useFetchSuggestions(page);
+  const {suggestions, loading, accept, error} = useFetchSuggestions(page);
 
-  const [displaySuggestions, setDisplaySuggestions] = useState(suggestions);
-  const [displayError, setDisplayError] = useState();
+  // const decline = (id) => {
+  //   const newSuggestions = displaySuggestions.filter((suggestion) => {
+  //     return suggestion.id !== id;
+  //   });
+  //   setDisplaySuggestions(newSuggestions);
+  // };
 
-  useEffect(() => {
-    setDisplaySuggestions(suggestions);
-  }, [suggestions]);
-
-  // console.log(`displaySuggestions`, displaySuggestions);
-
-  const accept = async (id) => {
-    const response = await acceptSuggestion(id);
-    if (response.data.data) {
-      const newSuggestions = displaySuggestions.filter((suggestion) => {
-        return suggestion.id !== id;
-      });
-      setDisplaySuggestions(newSuggestions);
-    }
-    setDisplayError(response.data.message);
-    // show error message
-    // setError()
-  };
-
-  const decline = (id) => {
-    const newSuggestions = displaySuggestions.filter((suggestion) => {
-      return suggestion.id !== id;
-    });
-    setDisplaySuggestions(newSuggestions);
+  const decline = () => {
+    console.log('got clicked :)');
   };
 
   function handlePageUp() {
@@ -51,7 +33,7 @@ const Form = () => {
   return (
     <div>
       <SuggestionContainer>
-        {displaySuggestions?.map((suggestion, index) => {
+        {suggestions?.map((suggestion, index) => {
           return (
             <Suggestion
               suggestion={suggestion}
@@ -59,7 +41,7 @@ const Form = () => {
               key={index}
               decline={decline}
               accept={accept}
-              displayError={displayError}
+              error={error}
             />
           );
         })}
