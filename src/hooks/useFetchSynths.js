@@ -54,6 +54,7 @@ function cancelRequest(cancelToken) {
 
 function handleError(setError) {
   return (error) => {
+    // console.log(`error`, error);
     if (axios.isCancel(error)) return;
     setError({
       status: error.response.status,

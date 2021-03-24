@@ -1,6 +1,7 @@
 import {useState, useEffect} from 'react';
 import axios from 'axios';
 import acceptSuggestion from '../services/acceptSuggestion';
+import declineSuggestion from '../services/declineSuggestion';
 
 const PAGINATION_LIMIT = 500;
 
@@ -38,6 +39,14 @@ const useFetchSuggestions = (page) => {
     }
   };
 
+  const decline = async (id) => {
+    const response = await declineSuggestion(id);
+    const newSuggestions = suggestions.filter((suggestion) => {
+      return suggestion.id !== id;
+    });
+    setSuggestions(newSuggestions);
+  };
+
   useEffect(() => {
     setLoading(true);
     setError(null);
@@ -71,7 +80,7 @@ const useFetchSuggestions = (page) => {
       });
   }, [page]);
 
-  return {suggestions, loading, error, accept};
+  return {suggestions, loading, error, accept, decline};
 };
 
 export default useFetchSuggestions;

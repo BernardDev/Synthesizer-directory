@@ -7,10 +7,12 @@ import {yupResolver} from '@hookform/resolvers/yup';
 import suggestionSchema from '../validation/suggestionSchema';
 import UploadButton from '../components/elements/UploadButton';
 import {FlexColumn} from './styles/componentStyles';
+import {StyledButton} from './elements/Button';
 
 const Form = () => {
   const [fileName, setFileName] = useState('Upload a Photo');
   const [response, setResponse] = useState('');
+  const [file, setFile] = useState();
   const {register, handleSubmit, errors} = useForm({
     resolver: yupResolver(suggestionSchema),
   });
@@ -41,6 +43,7 @@ const Form = () => {
       return;
     }
     setFileName(`${e.target.files[0].name}`);
+    setFile(e.target.files[0]);
   };
 
   return (
@@ -64,6 +67,7 @@ const Form = () => {
         ref={register}
       />
       {errors.yearProduced && <p>{errors.yearProduced.message}</p>}
+      {file && <img src={URL.createObjectURL(file)} />}
       <UploadButton
         handleSelectFile={handleSelectFile}
         register={register}
@@ -104,7 +108,7 @@ const Form = () => {
         ref={register}
       />
       <FlexColumn>
-        <StyledSubmit type='submit' />
+        <StyledButton type='submit' />
       </FlexColumn>
       {response && <p>{response}</p>}
     </StyledForm>
@@ -119,26 +123,21 @@ const StyledInput = styled.input`
   padding: 10px 15px;
   margin-bottom: 10px;
   font-size: 14px;
+  background: linear-gradient(#3c3c3c, #3c3c3c) center bottom 1px /
+    calc(100% - 10px) 1px no-repeat;
+
+  background-color: #fcfcfc;
+  /* border: 1px solid; */
+  /* padding: 10px; */
 `;
 
 const StyledForm = styled.form`
   max-width: 500px;
   margin: 0 auto;
+  margin-top: 2rem;
   padding: 1rem;
-  background-color: wheat;
-`;
-
-const StyledSubmit = styled.input`
-  box-sizing: border-box;
-  background: green;
-  color: white;
-  text-transform: uppercase;
-  border: none;
-  margin-left: 0;
-  margin-right: 0;
-  margin-top: 40px;
-  padding: 15px;
-  width: 60%;
+  border: 1px solid #cdcdcd;
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
 `;
 
 const StyledLabel = styled.label`

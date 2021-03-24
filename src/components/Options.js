@@ -23,7 +23,7 @@ const OptionsContainer = styled.div`
   top: 0px;
   height: 40px;
   width: 100%;
-  background-color: #000;
+  background-color: #3c3c3c;
   z-index: 1;
 `;
 

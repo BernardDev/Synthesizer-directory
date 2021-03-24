@@ -19,7 +19,7 @@ const UploadButton = ({handleSelectFile, register, fileName}) => {
 
       <StyledUploadButton>
         <label className='inputfileLabel' name='image' htmlFor='image'>
-          {fileName}
+          <Label>{fileName}</Label>
         </label>
         <StyleIconContainer>
           <FontAwesomeIcon icon={faFileUpload} size='lg' transform='left-2' />
@@ -31,11 +31,16 @@ const UploadButton = ({handleSelectFile, register, fileName}) => {
 
 export default UploadButton;
 
+const Label = styled.p`
+  overflow: hidden;
+  text-overflow: ellipsis;
+`;
+
 const StyledUploadButton = styled.div`
   position: relative;
   text-align: center;
   box-sizing: border-box;
-  background: green;
+  background: blue;
   color: white;
   text-transform: uppercase;
   border: none;
@@ -44,8 +49,6 @@ const StyledUploadButton = styled.div`
   margin-top: 40px;
   width: 60%;
   white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
 `;
 
 const StyleIconContainer = styled.span`

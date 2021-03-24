@@ -8,6 +8,7 @@
 }
 
 .inputfileLabel {
+  width: 100%;
   /* width: 100%;
   display: inline-block; */
 }
@@ -42,5 +43,5 @@ label {
   justify-self: inline-flex;
   justify-content: center;
   align-items: center;
-  padding: 15px;
+  padding: 0 15px;
 }
