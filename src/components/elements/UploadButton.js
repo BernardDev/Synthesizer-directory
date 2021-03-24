@@ -7,20 +7,18 @@ import {FlexColumn} from '../styles/componentStyles';
 const UploadButton = ({handleSelectFile, register, fileName}) => {
   return (
     <FlexColumn className='contain-submit'>
-      <input
+      <StyledInput
         type='file'
         name='image'
         id='image'
         htmlFor='image'
         onChange={handleSelectFile}
         ref={register}
-        className='inputfile'
       />
-
       <StyledUploadButton>
-        <label className='inputfileLabel' name='image' htmlFor='image'>
+        <StyledLabel name='image' htmlFor='image'>
           <Label>{fileName}</Label>
-        </label>
+        </StyledLabel>
         <StyleIconContainer>
           <FontAwesomeIcon icon={faFileUpload} size='lg' transform='left-2' />
         </StyleIconContainer>
@@ -30,6 +28,36 @@ const UploadButton = ({handleSelectFile, register, fileName}) => {
 };
 
 export default UploadButton;
+
+const StyledInput = styled.input`
+  font-size: 1rem;
+  z-index: 0;
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+  &:focus + label {
+    outline: 1px dotted #000;
+    outline: -webkit-focus-ring-color auto 5px;
+  }
+`;
+
+const StyledLabel = styled.label`
+  width: 100%;
+  cursor: pointer;
+  position: relative;
+  margin: 0;
+  box-sizing: border-box;
+  display: flex;
+  justify-self: inline-flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 15px;
+  font-size: 1rem;
+  z-index: 0;
+`;
 
 const Label = styled.p`
   overflow: hidden;

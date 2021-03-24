@@ -1,28 +1,13 @@
-import './form.css';
-import './accept.css';
-import React, {useState} from 'react';
+import React from 'react';
 import useFetchSuggestions from '../hooks/useFetchSuggestions';
 import Suggestion from './Suggestion';
 import styled from 'styled-components';
 
 const Form = () => {
-  const [page, setPage] = useState(0);
-  const {suggestions, loading, accept, decline, error} = useFetchSuggestions(
-    page
-  );
-
-  function handlePageUp() {
-    // if (!hasMore) return;
-    setPage((prevPage) => prevPage + 1);
-  }
-
-  function handlePageDown() {
-    // if (page <= 0) return;
-    setPage((prevPage) => prevPage - 1);
-  }
+  const {suggestions, loading, accept, decline, error} = useFetchSuggestions();
 
   return (
-    <Container>
+    <>
       <SuggestionContainer>
         {suggestions?.map((suggestion, index) => {
           return (
@@ -37,13 +22,9 @@ const Form = () => {
           );
         })}
       </SuggestionContainer>
-      <button onClick={handlePageUp}>Up</button>
-      <button onClick={handlePageDown}>Down</button>
-    </Container>
+    </>
   );
 };
-
-const Container = styled.div``;
 
 const SuggestionContainer = styled.div`
   margin: 1rem;

@@ -1,18 +1,17 @@
 import React from 'react';
-import styled, {svg} from 'styled-components';
+import styled from 'styled-components';
 import {NavLink} from 'react-router-dom';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faUserCog} from '@fortawesome/free-solid-svg-icons';
 import logo from '../img/logo.svg';
 console.log(`logotje`, logo);
 
-const Navigation = ({query, handleSearch, manufacturers}) => {
+const Navigation = () => {
   return (
     <NavigationContainer>
       <NavigationBar>
         <StyledLogoContainer>
-          {/* <StyledLogo /> */}
-          <StyledLogoSvg src={logo} alt='thisalt' />
+          <StyledLogoSvg src={logo} alt='logo' />
         </StyledLogoContainer>
         <StyledNavLinkContainer>
           <StyledLink>
@@ -51,14 +50,6 @@ const StyledLogoContainer = styled.div`
   width: 50%;
 `;
 
-const StyledLogo = styled.div`
-  margin-left: 3rem;
-  height: 100%;
-  width: 100%;
-  background-color: turquoise;
-  cursor: pointer;
-`;
-
 const StyledLogoSvg = styled.svg`
   height: 100%;
   width: 100%;
@@ -88,8 +79,5 @@ const NavigationBar = styled.div`
   height: 50px;
   width: 100%;
 `;
-
-// google dark grey #282828
-// google light grey #3c3c3c
 
 export default Navigation;

@@ -42,7 +42,6 @@ const useFetchSynths = (query, page, manufacturers) => {
     })
       .then(updateStates(setSynths, setHasMore, setLoading))
       .catch(handleError(setError));
-    // cancel previous request if new request is made while fetching
     return () => cancelRequest(cancel);
   }, [query, page, manufacturers]);
   return {loading, error, synths, hasMore};
@@ -54,7 +53,6 @@ function cancelRequest(cancelToken) {
 
 function handleError(setError) {
   return (error) => {
-    // console.log(`error`, error);
     if (axios.isCancel(error)) return;
     setError({
       status: error.response.status,

@@ -1,12 +1,8 @@
-import './accept.css';
-import React, {useState} from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import {StyledButtonNormal} from './elements/Button';
 
-const Suggestion = ({suggestion, loading, decline, accept, error}) => {
-  console.log(`suggestio.error`, suggestion.message);
-  // const [feedback, setFeedback] = useState('messaging');
-
+const Suggestion = ({suggestion, decline, accept}) => {
   const handleAccept = () => {
     accept(suggestion.id);
   };
@@ -88,21 +84,13 @@ const Text = styled.span`
 const StyledButtonContainer = styled.div`
   display: flex;
   justify-content: flex-start;
-  /* width: 100%; */
 `;
 
 const StyledImgWrapper = styled.div`
   margin: 0 auto;
-  /* max-width: 300px; */
   width: 300px;
   height: auto;
 `;
-
-// fill - This is default. The image is resized to fill the given dimension. If necessary, the image will be stretched or squished to fit
-// contain - The image keeps its aspect ratio, but is resized to fit within the given dimension
-// cover - The image keeps its aspect ratio and fills the given dimension. The image will be clipped to fit
-// none - The image is not resized
-// scale-down - the image is scaled down to the smallest version of none or contain
 
 const StyledImg = styled.img`
   width: 100%;
@@ -125,9 +113,5 @@ const StyledInfo = styled.div`
   justify-content: space-around;
   word-wrap: break-word;
 `;
-
-// function addItem()
-
-// const ImgWrap
 
 export default Suggestion;

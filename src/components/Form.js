@@ -1,4 +1,3 @@
-import './form.css';
 import React, {useState} from 'react';
 import axios from 'axios';
 import {useForm} from 'react-hook-form';
@@ -19,8 +18,7 @@ const Form = () => {
 
   const onSubmit = async (data) => {
     setResponse('');
-    const formData = new FormData();
-    formatFormData(data, formData);
+    const formData = formatFormData(data);
     try {
       const res = await axios.post(
         `${process.env.REACT_APP_API_URL}/contribute`,
@@ -40,6 +38,7 @@ const Form = () => {
   const handleSelectFile = (e) => {
     if (!e.target.files[0]) {
       setFileName('Upload a file');
+      setFile();
       return;
     }
     setFileName(`${e.target.files[0].name}`);
@@ -51,13 +50,13 @@ const Form = () => {
       <StyledInput
         name='name'
         placeholder='Name of the Synth...'
-        ref={register({required: true, maxLength: 80})}
+        ref={register}
       />
       {errors.name && <p>{errors.name.message}</p>}
       <StyledInput
         name='manufacturer'
         placeholder='Manufacturer of the Synth...'
-        ref={register({required: true, maxLength: 80})}
+        ref={register}
       />
       {errors.manufacturer && <p>{errors.manufacturer.message}</p>}
       <StyledInput
@@ -67,7 +66,7 @@ const Form = () => {
         ref={register}
       />
       {errors.yearProduced && <p>{errors.yearProduced.message}</p>}
-      {file && <img src={URL.createObjectURL(file)} />}
+      {file && <img src={URL.createObjectURL(file)} alt='upload preview' />}
       <UploadButton
         handleSelectFile={handleSelectFile}
         register={register}
@@ -125,10 +124,7 @@ const StyledInput = styled.input`
   font-size: 14px;
   background: linear-gradient(#3c3c3c, #3c3c3c) center bottom 1px /
     calc(100% - 10px) 1px no-repeat;
-
   background-color: #fcfcfc;
-  /* border: 1px solid; */
-  /* padding: 10px; */
 `;
 
 const StyledForm = styled.form`
@@ -149,22 +145,13 @@ const StyledLabel = styled.label`
 
 export default Form;
 
-function formatFormData(data, formData) {
-  // formData.append('polyphony', data.polyphony);
-  // formData.append('keyboard', data.keyboard);
-  // formData.append('control', data.control);
-  // formData.append('yearProduced', data.yearProduced);
-  // formData.append('memory', data.memory);
-  // formData.append('oscillators', data.oscillators);
-  // formData.append('filter', data.filter);
-  // formData.append('lfo', data.lfo);
-  // formData.append('effects', data.effects);
-  // formData.append('manufacturer', data.manufacturer);
-  // formData.append('name', data.name);
-  // formData.append('image', data.image[0]);
+function formatFormData(data) {
+  const formData = new FormData();
   Object.keys(data).forEach((key) => {
     formData.append(key, data[key]);
   });
+  // image needs to be appended last for multer middleware in backend
   delete formData.image;
   formData.append('image', data.image[0]);
+  return formData;
 }
