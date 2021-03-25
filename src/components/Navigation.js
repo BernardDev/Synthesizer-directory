@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import {NavLink} from 'react-router-dom';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faUserCog} from '@fortawesome/free-solid-svg-icons';
-import logo from '../img/logo.svg';
+import logo from '../img/synth2.svg';
 console.log(`logotje`, logo);
 
 const Navigation = () => {
@@ -11,7 +11,7 @@ const Navigation = () => {
     <NavigationContainer>
       <NavigationBar>
         <StyledLogoContainer>
-          <StyledLogoSvg src={logo} alt='logo' />
+          <StyledImage src={logo} />
         </StyledLogoContainer>
         <StyledNavLinkContainer>
           <StyledLink>
@@ -20,6 +20,14 @@ const Navigation = () => {
               to={'/contribute'}
             >
               Contribute
+            </NavLink>
+          </StyledLink>
+          <StyledLink>
+            <NavLink
+              style={{textDecoration: 'none', color: 'white'}}
+              to={'/admins'}
+            >
+              Register
             </NavLink>
           </StyledLink>
           <StyledLink>
@@ -37,6 +45,13 @@ const Navigation = () => {
     </NavigationContainer>
   );
 };
+
+const StyledImage = styled.img`
+  margin-top: 20px;
+  margin-left: 30px;
+  width: 80px;
+  height: 80px;
+`;
 
 const NavigationContainer = styled.div`
   position: sticky;

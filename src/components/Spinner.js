@@ -2,6 +2,7 @@ import React from 'react';
 import styled, {keyframes} from 'styled-components';
 
 const Spinner = (props) => {
+  console.log(`props`, props);
   return (
     <div>
       <StyleSvg
