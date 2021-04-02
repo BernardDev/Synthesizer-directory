@@ -1,7 +1,9 @@
 # :sound: Synthesizer Director :sound:
 
 :fire:[Synthesizer Directory](https://synthesizer-directory.netlify.app/):fire:
+
 <br>
+
 :fire:[Go to API explorer!](https://synthesizer-api.netlify.app/):fire:
 :fire:[Synthesizer API repo](https://github.com/BernardDev/Synthesizer-API):fire:
 
