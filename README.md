@@ -1,4 +1,4 @@
-# :sound: Synthesizer Director :sound:
+# Synthesizer Director :sound:
 
 :fire:[Synthesizer Directory](https://synthesizer-directory.netlify.app/):fire:
 
@@ -8,11 +8,10 @@
 
 :fire:[Synthesizer API repo](https://github.com/BernardDev/Synthesizer-API):fire:
 
-For all you gearslutz out there! This free API is the only one out there (since I checked). Explore over 800 synthesizers from past and present. Get insight in their manufacturers and specifications. The API builds upon the data available on the vintagesynthexplorer website. Future work will be aimed to broaden querying options and let you fellow synth lovers contribute to the collection.
+This frontend is built upon my API mentioned above. 
+
 
 ---
-
-## Growing as a Developer:
 
 - [About this Project](#about-this-project) :dart:
   <br>
@@ -32,27 +31,17 @@ For all you gearslutz out there! This free API is the only one out there (since 
 - [Git Version Control](#git-version-control) :octocat:
   <br>
 
-## For Usage:
-
-- [Usage](#usage) :zap:
-  <br>
-
-- [Future Work](#future-work) :fire:
-  <br>
-
 ---
 
 ## About this Project
 
 <br>
 
-The goal of this project is to build an public REST API :dart: and thereby applying existing knowledge and explore new terrains. This was done independently by reading its documentation, watching online videos, consulting StackExchange & sometime my coach.
-
-Although this project aimed at making a public API, I obviously tried it out myself! Therefore I made a [frontend](https://github.com/BernardDev/Synthesizer-directory/tree/development/) that uses it. In development some features where added to the backend as well. Such as a route to suggest synthesizer and an admin login system.
+The goal of this project is to ... explore some new styling option ander. Therefore I made use of some morden cocept such as ...
 
 <br>
 
-Be sure to visit the :fire:[Synthesizer Directory](https://synthesizer-directory.netlify.app/):fire: as well.
+Be sure to visit the :fire:[API Explorer](https://synthesizer-api.netlify.app/):fire: as well.
 <br>
 <br>
 
