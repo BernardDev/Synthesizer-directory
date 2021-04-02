@@ -34,7 +34,7 @@ This frontend is built upon my API mentioned above.
 
 <br>
 
-The goal of this project is to ... explore some new styling option ander. Therefore I made use of some morden cocept such as ...
+The goal of this project is to ... explore some new styling option ander. Therefore I made use of some morden cocept such as ... Journey through the history of synthesizers bla bla
 
 <br>
 
@@ -47,16 +47,15 @@ Be sure to visit the :fire:[API Explorer](https://synthesizer-api.netlify.app/):
 
 <br>
 
-> [ENVIRONMENTS](https://github.com/BernardDev/Synthesizer-API/tree/development/server/config/config.js) <br>
+> [INFINITE SCROLLING](https://github.com/BernardDev/Synthesizer-directory) <br>
 
-Throughout the project we have used the development, testing and production environments. Switching in/out sources and storing key's and secret's in .env and hosts.
-Wrapping my head around it was challenging at first. Now I feel comfortable to use this in real projects.
+The main page of the application is a page where a user can scroll through a (time)line of synthesizer images that pop-up from both sides. To make this happen I implemented lazyloading with Intersection Observer, UseRef & UseCallback. Intersection Observer triggered the fetching of a new batch of images by observing an actual DOM element, beeing the last synth on the page. For this to work I needed to refference this element with UseRef.
 
 <br>
 
-> [END-TO-END TESTING](https://github.com/BernardDev/Synthesizer-API/tree/development/server/tests) <br>
+> [STYLED COMPONETNS](https://github.com/BernardDev/Synthesizer-directory) <br>
 
-All end-point have been thoroughly tested. The [testing](https://github.com/BernardDev/Synthesizer-API/tree/development/server/tests/) formed the basis of development in the project. Checking if correct responses were given & testing the possible 'un-happy' paths. This made me feel safe to refactor some code. Jest and Supertest were used in de backend, Jest & Playwright (like Puppeteer) in the frontend.
+Making this frontend gave me the chance of exploring Styled Components
 
 <br>
 
