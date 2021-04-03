@@ -20,13 +20,13 @@ This frontend is built upon my Synthesizer API. The project aim's to offer an ap
 
 > [INFINITE SCROLLING](https://github.com/BernardDev/Synthesizer-directory) <br>
 
-On the main page images pop-up from both sides with CSS animations. When the limit has been reached of the fetched synths a new batch is fetched on observing the last element. To make this happen I utilized Intersection Observer. There was also a need for a reference to the an actual DOM element, therfore UseRef was explored (together with UseCallback).
+On the main page images pop-up from both sides with [CSS Animations](#). When the limit has been reached of the fetched synths a new batch is fetched on observing the last element. To make this happen I utilized [Intersection Observer](#). There was also a need for a reference to the an actual DOM element, therfore UseRef was explored (together with UseCallback).
 
 <br>
 
 > [STYLED COMPONETNS](https://github.com/BernardDev/Synthesizer-directory) <br>
 
-Making this frontend gave me the chance of exploring more tools in my styling toolbox. Since I am working in React, Styled Components seemed fitting. It blends in so well with React's inner working and is nice to combine with Sass.
+Making this frontend gave me the chance of exploring more tools in my styling toolbox. Since I am working in React, [Styled Components](#) seemed fitting. It blends in so well with React's inner working and is nice to combine with Sass.
 
 <br>
 
@@ -37,7 +37,7 @@ Validation was done with [Yup](https://github.com/BernardDev/Synthesizer-directo
 
 > [USECONTEXT](https://github.com/BernardDev/Synthesizer-directory/tree/development) <br>
 > 
-To store the JWT token, aquired from a succesfull admin registration and login, UseContext is used.
+To store the JWT token, aquired from a succesfull admin registration and login, [UseContext](#) is used.
 
 <br>
 
