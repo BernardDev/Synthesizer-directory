@@ -20,25 +20,30 @@ This frontend is built upon my Synthesizer API. The project aim's to offer an ap
 
 > [INFINITE SCROLLING](https://github.com/BernardDev/Synthesizer-directory) <br>
 
-On the main page images pop-up from both sides. When the limit when all fetched synths are displayed while scrolling a new batch is fetched. To make this happen I utilized Intersection Observer together. There was also a need for a reference to the an actual DOM element, therfore UseRef was explored (together with UseCallback).
+On the main page images pop-up from both sides with CSS animations. When the limit has been reached of the fetched synths a new batch is fetched on observing the last element. To make this happen I utilized Intersection Observer. There was also a need for a reference to the an actual DOM element, therfore UseRef was explored (together with UseCallback).
 
 <br>
 
 > [STYLED COMPONETNS](https://github.com/BernardDev/Synthesizer-directory) <br>
 
-Making this frontend gave me the chance of exploring more tools in my styling toolbox. Since I am working in React Styled Components seemed fitting. It blends in so well with React's inner working and is nice to combine with Sass.
+Making this frontend gave me the chance of exploring more tools in my styling toolbox. Since I am working in React, Styled Components seemed fitting. It blends in so well with React's inner working and is nice to combine with Sass.
 
 <br>
 
 > [VALIDATION & ERROR HANDLING](https://github.com/BernardDev/Synthesizer-API/tree/development/server) <br>
 
-Validation was done with [Yup]() (https://github.com/BernardDev/Synthesizer-directory/tree/development/src/validation/suggestionSchema.js). Together with [middlewares](https://github.com/BernardDev/Synthesizer-API/tree/development/server/validators) to safeguarded the routes from user errors and send meaningful feedback to the client when they do occur.
-Also validated in the backend: multipart/form-data & attachments.
-
+Validation was done with [Yup](https://github.com/BernardDev/Synthesizer-directory/tree/development). It aim's to deliver meaningful feedback to the client when an mistake occurs. Also validated in front and backend: multipart/form-data & attachments.
 <br>
 
 > [USECONTEXT](https://github.com/BernardDev/Synthesizer-directory/tree/development) <br>
+To store the JWT token, aquired from a succesfull admin registration and login, UseContext is used.
 
+<br>
+
+<br>
+
+> [STICKY ADVANCED](https://github.com/BernardDev/Synthesizer-directory/tree/development) <br>
+To be able to get only the new years stick to the top when scrolling through the synthesizer [this](#) construction is used.
 
 <br>
 
@@ -47,12 +52,13 @@ Also validated in the backend: multipart/form-data & attachments.
 
 |                              |                         |                          |                       |
 | ---------------------------- | ----------------------- | ------------------------ | --------------------- |
-| CSS Animation                | fetch data              | React Hook Form          | custom Hooks          |
-| validation                   | error handling          | Intersection Observer    | Styled Components     |
-| UseCallback                  | UseRef                  | Lazy loading             | pagination            |
-| Yup                          | handling file upload    | styling file upload      | multipart/form-data   |
-| Multer                       | make svg spinner        | UseContext               | autocomplete          |
-| Axios cancel token           | prevState               | sticky advanced          | Playwright            |
+| CSS Animation                | fetching data           | React Hook Form          | custom Hooks          |
+| validation                   | error handling          | Intersection Observer :star: | Styled Components |
+| UseCallback :star:           | UseRef :star:           | lazy loading             | pagination            |
+| Yup                          | handling file upload    | styling file upload      | multipart/form-data :star: |
+| Multer :star:                | creating svg's          | UseContext               | autocomplete          |
+| Axios cancel token           | prevState :star:        | sticky (advanced)        | Playwright            |
+| frontend JWT                 |                         |                          |                       |
 
 <br>
 
@@ -62,12 +68,15 @@ Also validated in the backend: multipart/form-data & attachments.
 
 ### User Stories
 
-- As a User I want to be able to 
-- As a User I want to be able to 
-- As a User I want to be able to 
-- As a User I want to be able to 
-- As a User I want to be able to 
-- As a User I want to be able to 
+- As a User I want to be able to be able to see synthesizers, so I can satisfy my needs 
+- As a User I want to be able to be able to see synthesizers sorted by the year the are produced, so I can get a feeling for their history
+- As a User I want to be able to be able to query all synthesizers from one specific manufacturers, so I can only look for 'Roland' synthesizers
+- As a User I want to be able to be able to know what manufacturers I can choose from, so I get the data I'm looking for
+- As a User I want to be able to contribute to the collection, so I can help make this the biggest directory of synthesizers out there
+- As a User I want to be able to know what is not allowed when suggesting a new synthesizer, so I can do it in a swift manner
+- As Myself I want to be able to judge the suggested synthesizer, so I can decide which one's will be added to the collection
+
+- [ ] As a User I want to be able to filter and sort synthesizers on options other then year they are produced   
 
 <br>
 
