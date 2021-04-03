@@ -36,13 +36,13 @@ Validation was done with [Yup](https://github.com/BernardDev/Synthesizer-directo
 <br>
 
 > [USECONTEXT](https://github.com/BernardDev/Synthesizer-directory/tree/development) <br>
+> 
 To store the JWT token, aquired from a succesfull admin registration and login, UseContext is used.
 
 <br>
 
-<br>
-
 > [STICKY ADVANCED](https://github.com/BernardDev/Synthesizer-directory/tree/development) <br>
+> 
 To be able to get only the new years stick to the top when scrolling through the synthesizer [this](#) construction is used.
 
 <br>
