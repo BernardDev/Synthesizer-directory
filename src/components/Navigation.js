@@ -4,7 +4,6 @@ import {NavLink} from 'react-router-dom';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faUserCog} from '@fortawesome/free-solid-svg-icons';
 import logo from '../img/synth2.svg';
-console.log(`logotje`, logo);
 
 const Navigation = () => {
   return (
@@ -36,7 +35,7 @@ const Navigation = () => {
             </NavLink>
           </StyledLink>
           <StyledLink>
-            <NavLink style={{color: 'white'}} to={'/admin'}>
+            <NavLink style={{color: 'white'}} to={'/suggestions'}>
               <FontAwesomeIcon icon={faUserCog} size='lg' transform='' />
             </NavLink>
           </StyledLink>

@@ -8,8 +8,8 @@ const RegisterLogin = () => {
   return (
     <StyledRegisterLogin>
       <Navigation />
-      <Login />
       <Register />
+      <Login />
     </StyledRegisterLogin>
   );
 };

@@ -47,6 +47,7 @@ const Form = () => {
 
   return (
     <StyledForm onSubmit={handleSubmit(onSubmit)}>
+      <StyledLabel>Suggest a new synthesizer</StyledLabel>
       <StyledInput
         name='name'
         placeholder='Name of the Synth...'
@@ -73,7 +74,7 @@ const Form = () => {
         fileName={fileName}
       />
       {errors.image && <p>{errors.image.message}</p>}
-      <StyledLabel>Optional</StyledLabel>
+      <StyledLabel>(optional)</StyledLabel>
       <StyledInput
         name='polyphony'
         placeholder='Amount of Voices...'

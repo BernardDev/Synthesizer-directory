@@ -1,22 +1,27 @@
 import {useState, useEffect} from 'react';
+import {useHistory} from 'react-router-dom';
 import axios from 'axios';
 import acceptSuggestion from '../services/acceptSuggestion';
 import declineSuggestion from '../services/declineSuggestion';
+import useToken from '../context/store';
 
 const PAGINATION_LIMIT = 500;
 
 const useFetchSuggestions = () => {
+  const {token} = useToken();
+  localStorage.setItem('token', token);
+
   const [suggestions, setSuggestions] = useState();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState();
 
   const accept = async (id) => {
-    const response = await acceptSuggestion(id);
+    const response = await acceptSuggestion(id, token);
     updateSuggestions(response, response.data.data, id);
   };
 
   const decline = async (id) => {
-    const response = await declineSuggestion(id);
+    const response = await declineSuggestion(id, token);
     updateSuggestions(response, response.status === 200, id);
   };
 
@@ -28,26 +33,34 @@ const useFetchSuggestions = () => {
     setSuggestions(suggestions.filter((suggestion) => suggestion.id !== id));
   }
 
+  let history = useHistory();
+
   useEffect(() => {
     setLoading(true);
     setError(null);
     axios({
       method: 'GET',
-      url: `${process.env.REACT_APP_API_URL}/admin`,
+      url: `${process.env.REACT_APP_API_URL}/suggestions`,
       params: {
         offset: 0,
         limit: PAGINATION_LIMIT,
       },
+      headers: {
+        Authorization: token,
+      },
     })
       .then((res) => {
+        // console.log(`res`, res);
         setSuggestions(res.data.suggestions);
         setLoading(false);
       })
       .catch((error) => {
-        console.log(`error`, error);
+        window.alert('You need to be an approved admin');
+        history.push('/admins');
+        console.log(`error`, error.response.data.message);
         setError({
           status: error.response.status,
-          text: error.response.statusText,
+          text: error.response.data.message,
         });
       });
   }, []);

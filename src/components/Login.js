@@ -1,4 +1,5 @@
-import React, {useState} from 'react';
+import React, {useState, useContext} from 'react';
+import {useHistory} from 'react-router-dom';
 import axios from 'axios';
 import {useForm} from 'react-hook-form';
 import styled from 'styled-components';
@@ -6,23 +7,31 @@ import {yupResolver} from '@hookform/resolvers/yup';
 import loginSchema from '../validation/registerSchema';
 import {FlexColumn} from './styles/componentStyles';
 import {StyledButton} from './elements/Button';
+import useToken from '../context/store';
 
 const Login = () => {
+  let history = useHistory();
   const [response, setResponse] = useState('');
   const {register, handleSubmit, errors} = useForm({
     resolver: yupResolver(loginSchema),
   });
 
+  const {token, setToken} = useToken();
+
   const onSubmit = async (data) => {
-    console.log(`data`, data);
+    // console.log(`data`, data);
     setResponse('');
     try {
       const res = await axios.post(
         `${process.env.REACT_APP_API_URL}/login`,
         data
       );
+      // console.log(`res`, res);
       setResponse(res.data.message);
+      setToken(`Bearer ${res.data.token}`);
+      history.push('/suggestions');
     } catch (error) {
+      // console.log(`error.response`, error.response);
       setResponse(error.response.statusText);
       console.log(`error`, error);
     }
@@ -31,7 +40,7 @@ const Login = () => {
   return (
     <>
       <StyledForm onSubmit={handleSubmit(onSubmit)}>
-        <StyledLabel>Login</StyledLabel>
+        <StyledLabel>Login (only approved admins)</StyledLabel>
         <StyledInput
           name='email'
           email='email'
@@ -40,6 +49,7 @@ const Login = () => {
         />
         {errors.email && <p>{errors.email.message}</p>}
         <StyledInput
+          type='password'
           name='password'
           password='password'
           placeholder='Enter your password'

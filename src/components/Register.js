@@ -14,7 +14,7 @@ const Register = () => {
   });
 
   const onSubmit = async (data) => {
-    console.log(`data`, data);
+    // console.log(`data`, data);
     setResponse('');
     try {
       const res = await axios.post(
@@ -31,7 +31,7 @@ const Register = () => {
   return (
     <>
       <StyledForm onSubmit={handleSubmit(onSubmit)}>
-        <StyledLabel>Register</StyledLabel>
+        <StyledLabel>Register (to be eligible for admin rights) </StyledLabel>
         <StyledInput
           name='email'
           email='email'
@@ -40,6 +40,7 @@ const Register = () => {
         />
         {errors.email && <p>{errors.email.message}</p>}
         <StyledInput
+          type='password'
           name='password'
           password='password'
           placeholder='Enter your password'
