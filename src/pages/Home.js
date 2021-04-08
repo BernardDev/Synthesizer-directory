@@ -1,21 +1,30 @@
 import React, {useState, useRef, useCallback} from 'react';
-import useFetch from '../hooks/useFetch';
+import useFetchSynths from '../hooks/useFetchSynths';
 import Navigation from '../components/Navigation';
 import Timeline from '../components/Timeline';
 import Synth from '../components/Synth';
 import Feedback from '../components/Feedback';
+import Spinner from '../components/Spinner';
 import styled from 'styled-components';
+import useFetchManufacturers from '../hooks/useFetchManufacturers';
+import Options from '../components/Options';
 
 const Homepage = () => {
-  const [query, setQuery] = useState();
   const [page, setPage] = useState(0);
-  const {synths, hasMore, loading, error} = useFetch(query, page);
-  const observer = useRef();
+  const [query, setQuery] = useState();
+  const manufacturers = useFetchManufacturers();
+  const {synths, hasMore, loading, error} = useFetchSynths(
+    query,
+    page,
+    manufacturers
+  );
 
   const handleSearch = (e) => {
     setQuery(e.target.value);
     setPage(0);
   };
+
+  const observer = useRef();
 
   const paginationTrigger = useCallback(
     (node) => {
@@ -36,34 +45,77 @@ const Homepage = () => {
 
   return (
     <Home>
-      <Navigation query={query} handleSearch={handleSearch} />
-      <Timeline>
-        {synths.map((synth, index) => {
-          const isLastSynthesizer = synths.length === index + 1;
-          return isLastSynthesizer ? (
-            <Synth
-              key={index}
-              synth={synth}
-              index={index}
-              reference={paginationTrigger}
-              loading={loading}
-            />
-          ) : (
-            <Synth key={index} synth={synth} index={index} />
-          );
-        })}
-        <Feedback loading={loading} error={error} />
-      </Timeline>
+      <StickyContainer>
+        <Navigation
+          query={query}
+          handleSearch={handleSearch}
+          manufacturers={manufacturers}
+        />
+        <Options
+          query={query}
+          handleSearch={handleSearch}
+          manufacturers={manufacturers}
+        />
+      </StickyContainer>
+      {error ? (
+        <Frame>
+          <Feedback loading={loading} error={error} />
+        </Frame>
+      ) : (
+        <>
+          <Timeline>
+            {synths.map((synth, index) => {
+              const isLastSynthesizer = synths.length === index + 1;
+              return isLastSynthesizer ? (
+                <Synth
+                  key={index}
+                  synth={synth}
+                  index={index}
+                  reference={paginationTrigger}
+                  loading={loading ? 1 : 0}
+                />
+              ) : (
+                <Synth key={index} synth={synth} index={index} />
+              );
+            })}
+          </Timeline>
+          {loading && (
+            <Frame>
+              <Spinner width={400} loading={loading ? 1 : 0} />{' '}
+            </Frame>
+          )}
+        </>
+      )}
     </Home>
   );
 };
 
-const Home = styled.div`
+const StickyContainer = styled.div`
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  z-index: 99;
+`;
+
+const Frame = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0);
+`;
+
+const Home = styled.div`
   position: relative;
+  display: block;
+  /* flex-direction: row; */
+  /* display: flex; */
+  /* flex-direction: column; */
+  /* justify-content: center; */
+  /* align-items: center; */
+  /* position: relative; */
 `;
 
 export default Homepage;

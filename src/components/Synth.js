@@ -23,6 +23,7 @@ const Synth = ({reference, synth, index}) => {
       <Year even={index % 2 === 0}>
         <YearText>{Specification.yearProduced}</YearText>
       </Year>
+
       <SynthItem show={show} ref={animationTrigger}>
         <SynthName>{name}</SynthName>
         <Img src={img} />
@@ -40,11 +41,13 @@ const Year = styled.div`
   border-radius: 50%;
   color: #fff;
   background-color: #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   ${(props) => {
     return props.even
       ? css`
           right: 50%;
-          margin: -7px;
         `
       : css`
           left: 50%;
@@ -53,15 +56,14 @@ const Year = styled.div`
 `;
 
 const YearText = styled.p`
-  margin-left: 7px;
   font-size: 1rem;
   color: #fff;
 `;
 
 const SynthItem = styled.div`
   flex-grow: 0;
-  width: 30vw;
-  margin: 0 15vw;
+  width: 40vw;
+  margin: 0 5vw;
 `;
 
 const SynthName = styled.p`
