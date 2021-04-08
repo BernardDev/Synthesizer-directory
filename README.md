@@ -7,6 +7,8 @@
 
 ---
 
+![preview](gif-synth.gif)
+
 ## About this Project
 
 <br>
