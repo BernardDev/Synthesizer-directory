@@ -1,21 +1,39 @@
 import React from 'react';
+import styled from 'styled-components';
 import Home from './pages/Home';
-import Details from './pages/Details';
+import Contribute from './pages/Contribute';
+import RegisterLogin from './pages/RegisterLogin';
+import Admin from './pages/Admin';
 import {Switch, Route} from 'react-router-dom';
+import {TokenProvider} from './context/store';
 
 function App() {
   return (
-    <div className='App'>
-      <Switch>
-        <Route exact path='/'>
-          <Home />
-        </Route>
-        <Route path='/:synth_id'>
-          <Details />
-        </Route>
-      </Switch>
-    </div>
+    <Container className='App'>
+      <TokenProvider>
+        <Switch>
+          <Container>
+            <Route exact path='/'>
+              <Home />
+            </Route>
+            <Route path='/contribute'>
+              <Contribute />
+            </Route>
+            <Route path='/admins'>
+              <RegisterLogin />
+            </Route>
+            <Route path='/suggestions'>
+              <Admin />
+            </Route>
+          </Container>
+        </Switch>
+      </TokenProvider>
+    </Container>
   );
 }
+
+const Container = styled.div`
+  margin: 0 auto;
+`;
 
 export default App;

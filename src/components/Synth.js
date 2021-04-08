@@ -1,9 +1,8 @@
 import React, {useState, useCallback} from 'react';
 import styled, {keyframes, css} from 'styled-components';
-import {Link} from 'react-router-dom';
 
 const Synth = ({reference, synth, index}) => {
-  const {name, img, Specification, id} = synth;
+  const {name, img, Specification} = synth;
   const [show, setShow] = useState(false);
 
   const animationTrigger = useCallback((node) => {
@@ -24,11 +23,10 @@ const Synth = ({reference, synth, index}) => {
       <Year even={index % 2 === 0}>
         <YearText>{Specification.yearProduced}</YearText>
       </Year>
+
       <SynthItem show={show} ref={animationTrigger}>
-        <Link to={`/${id}`}>
-          <SynthName>{name}</SynthName>
-          <Img src={img} />
-        </Link>
+        <SynthName>{name}</SynthName>
+        <Img src={img} />
       </SynthItem>
     </SynthContainer>
   );
@@ -43,11 +41,13 @@ const Year = styled.div`
   border-radius: 50%;
   color: #fff;
   background-color: #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   ${(props) => {
     return props.even
       ? css`
           right: 50%;
-          margin: -7px;
         `
       : css`
           left: 50%;
@@ -56,15 +56,14 @@ const Year = styled.div`
 `;
 
 const YearText = styled.p`
-  margin-left: 7px;
   font-size: 1rem;
   color: #fff;
 `;
 
 const SynthItem = styled.div`
   flex-grow: 0;
-  width: 30vw;
-  margin: 0 15vw;
+  width: 40vw;
+  margin: 0 5vw;
 `;
 
 const SynthName = styled.p`

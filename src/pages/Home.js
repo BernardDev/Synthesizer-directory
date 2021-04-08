@@ -7,6 +7,7 @@ import Feedback from '../components/Feedback';
 import Spinner from '../components/Spinner';
 import styled from 'styled-components';
 import useFetchManufacturers from '../hooks/useFetchManufacturers';
+import Options from '../components/Options';
 
 const Homepage = () => {
   const [page, setPage] = useState(0);
@@ -44,11 +45,18 @@ const Homepage = () => {
 
   return (
     <Home>
-      <Navigation
-        query={query}
-        handleSearch={handleSearch}
-        manufacturers={manufacturers}
-      />
+      <StickyContainer>
+        <Navigation
+          query={query}
+          handleSearch={handleSearch}
+          manufacturers={manufacturers}
+        />
+        <Options
+          query={query}
+          handleSearch={handleSearch}
+          manufacturers={manufacturers}
+        />
+      </StickyContainer>
       {error ? (
         <Frame>
           <Feedback loading={loading} error={error} />
@@ -64,7 +72,7 @@ const Homepage = () => {
                   synth={synth}
                   index={index}
                   reference={paginationTrigger}
-                  loading={loading}
+                  loading={loading ? 1 : 0}
                 />
               ) : (
                 <Synth key={index} synth={synth} index={index} />
@@ -73,7 +81,7 @@ const Homepage = () => {
           </Timeline>
           {loading && (
             <Frame>
-              <Spinner width={400} loading={loading} />{' '}
+              <Spinner width={400} loading={loading ? 1 : 0} />{' '}
             </Frame>
           )}
         </>
@@ -81,6 +89,13 @@ const Homepage = () => {
     </Home>
   );
 };
+
+const StickyContainer = styled.div`
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  z-index: 99;
+`;
 
 const Frame = styled.div`
   display: flex;
@@ -93,11 +108,14 @@ const Frame = styled.div`
 `;
 
 const Home = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
   position: relative;
+  display: block;
+  /* flex-direction: row; */
+  /* display: flex; */
+  /* flex-direction: column; */
+  /* justify-content: center; */
+  /* align-items: center; */
+  /* position: relative; */
 `;
 
 export default Homepage;

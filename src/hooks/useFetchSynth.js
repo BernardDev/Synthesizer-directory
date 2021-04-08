@@ -6,12 +6,10 @@ const useFetchManufacturers = () => {
   const [synth, setSynth] = useState({});
   const params = useParams();
 
-  console.log('params', params);
-
   useEffect(() => {
     axios({
       method: 'GET',
-      url: `${process.env.REACT_APP_API_URL}/synths/${params.synth_id}`,
+      url: `${process.env.REACT_APP_API_URL}/api/synths/${params.synth_id}`,
       params: {
         key: `${process.env.REACT_APP_API_KEY}`,
       },

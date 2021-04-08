@@ -22,7 +22,9 @@ node_modules/
 
 INFO.md
 SNIP.md
+ENVBACKUP.md
 
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+

@@ -7,7 +7,7 @@ const useFetchManufacturers = () => {
   useEffect(() => {
     axios({
       method: 'GET',
-      url: `${process.env.REACT_APP_API_URL}/manufacturers`,
+      url: `${process.env.REACT_APP_API_URL}/api/manufacturers`,
       params: {
         offset: 0,
         limit: 500,
