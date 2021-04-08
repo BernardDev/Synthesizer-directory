@@ -4,32 +4,39 @@ import styled from 'styled-components';
 const Options = ({query, handleSearch, manufacturers}) => {
   return (
     <OptionsContainer>
-      <Field type='text' list='data' value={query} onChange={handleSearch} />
+      {/* <Sticky> */}
+      <Field
+        type='text'
+        list='data'
+        value={query}
+        onChange={handleSearch}
+        placeholder='search...'
+      />
       <Datalist id='data'>
         {manufacturers?.map((company, key) => (
           <option key={key} value={company.manufacturer} />
         ))}
       </Datalist>
+      {/* </Sticky> */}
     </OptionsContainer>
   );
 };
 
+// const Sticky = styled.div``;
+
 const Datalist = styled.datalist``;
 
 const OptionsContainer = styled.div`
+  background: green;
   display: flex;
   justify-content: center;
-  align-items: center;
-  top: 0px;
-  height: 40px;
-  width: 100%;
-  background-color: #3c3c3c;
-  z-index: 1;
+  padding: 0.5rem;
+  background-color: var(--grey);
 `;
 
 const Field = styled.input`
-  height: 20px;
-  width: 22%;
+  width: 12vw;
+  min-width: 90px;
 `;
 
 export default Options;

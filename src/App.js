@@ -1,4 +1,5 @@
-import React, {useState} from 'react';
+import React from 'react';
+import styled from 'styled-components';
 import Home from './pages/Home';
 import Contribute from './pages/Contribute';
 import RegisterLogin from './pages/RegisterLogin';
@@ -8,25 +9,31 @@ import {TokenProvider} from './context/store';
 
 function App() {
   return (
-    <div className='App'>
+    <Container className='App'>
       <TokenProvider>
         <Switch>
-          <Route exact path='/'>
-            <Home />
-          </Route>
-          <Route path='/contribute'>
-            <Contribute />
-          </Route>
-          <Route path='/admins'>
-            <RegisterLogin />
-          </Route>
-          <Route path='/suggestions'>
-            <Admin />
-          </Route>
+          <Container>
+            <Route exact path='/'>
+              <Home />
+            </Route>
+            <Route path='/contribute'>
+              <Contribute />
+            </Route>
+            <Route path='/admins'>
+              <RegisterLogin />
+            </Route>
+            <Route path='/suggestions'>
+              <Admin />
+            </Route>
+          </Container>
         </Switch>
       </TokenProvider>
-    </div>
+    </Container>
   );
 }
+
+const Container = styled.div`
+  margin: 0 auto;
+`;
 
 export default App;

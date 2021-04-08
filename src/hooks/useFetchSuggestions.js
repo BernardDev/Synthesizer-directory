@@ -63,7 +63,7 @@ const useFetchSuggestions = () => {
           text: error.response.data.message,
         });
       });
-  }, []);
+  }, [history, token]);
 
   return {suggestions, loading, error, accept, decline};
 };

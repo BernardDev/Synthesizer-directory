@@ -6,11 +6,20 @@ import Form from '../components/Form';
 const Contribute = () => {
   return (
     <StyledContributePage>
-      <Navigation />
+      <StickyContainer>
+        <Navigation />
+      </StickyContainer>
       <Form />
     </StyledContributePage>
   );
 };
+
+const StickyContainer = styled.div`
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  z-index: 99;
+`;
 
 const StyledContributePage = styled.div`
   width: 100%;

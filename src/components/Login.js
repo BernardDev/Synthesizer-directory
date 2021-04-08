@@ -1,4 +1,4 @@
-import React, {useState, useContext} from 'react';
+import React, {useState} from 'react';
 import {useHistory} from 'react-router-dom';
 import axios from 'axios';
 import {useForm} from 'react-hook-form';
@@ -16,7 +16,7 @@ const Login = () => {
     resolver: yupResolver(loginSchema),
   });
 
-  const {token, setToken} = useToken();
+  const {setToken} = useToken();
 
   const onSubmit = async (data) => {
     // console.log(`data`, data);
@@ -73,7 +73,7 @@ const StyledInput = styled.input`
   padding: 10px 15px;
   margin-bottom: 10px;
   font-size: 14px;
-  background: linear-gradient(#3c3c3c, #3c3c3c) center bottom 1px /
+  background: linear-gradient(var(--grey), var(--grey)) center bottom 1px /
     calc(100% - 10px) 1px no-repeat;
   background-color: #fcfcfc;
 `;

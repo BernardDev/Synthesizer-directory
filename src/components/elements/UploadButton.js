@@ -68,7 +68,7 @@ const StyledUploadButton = styled.div`
   position: relative;
   text-align: center;
   box-sizing: border-box;
-  background: blue;
+  background: var(--primary);
   color: white;
   text-transform: uppercase;
   border: none;

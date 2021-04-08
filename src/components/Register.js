@@ -14,6 +14,7 @@ const Register = () => {
   });
 
   const onSubmit = async (data) => {
+    // console.log(errors);
     // console.log(`data`, data);
     setResponse('');
     try {
@@ -64,7 +65,7 @@ const StyledInput = styled.input`
   padding: 10px 15px;
   margin-bottom: 10px;
   font-size: 14px;
-  background: linear-gradient(#3c3c3c, #3c3c3c) center bottom 1px /
+  background: linear-gradient(var(--grey), var(--grey)) center bottom 1px /
     calc(100% - 10px) 1px no-repeat;
   background-color: #fcfcfc;
 `;

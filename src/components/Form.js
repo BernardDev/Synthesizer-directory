@@ -67,7 +67,9 @@ const Form = () => {
         ref={register}
       />
       {errors.yearProduced && <p>{errors.yearProduced.message}</p>}
-      {file && <img src={URL.createObjectURL(file)} alt='upload preview' />}
+      {file && (
+        <StyledImgPrev src={URL.createObjectURL(file)} alt='upload preview' />
+      )}
       <UploadButton
         handleSelectFile={handleSelectFile}
         register={register}
@@ -115,6 +117,11 @@ const Form = () => {
   );
 };
 
+const StyledImgPrev = styled.img`
+  max-width: 460px;
+  height: auto;
+`;
+
 const StyledInput = styled.input`
   box-sizing: border-box;
   width: 100%;
@@ -123,7 +130,7 @@ const StyledInput = styled.input`
   padding: 10px 15px;
   margin-bottom: 10px;
   font-size: 14px;
-  background: linear-gradient(#3c3c3c, #3c3c3c) center bottom 1px /
+  background: linear-gradient(var(--grey), var(--grey)) center bottom 1px /
     calc(100% - 10px) 1px no-repeat;
   background-color: #fcfcfc;
 `;

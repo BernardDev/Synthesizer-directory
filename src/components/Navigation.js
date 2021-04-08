@@ -1,97 +1,161 @@
-import React from 'react';
+import './navigation.scss';
+import React, {useState, useEffect} from 'react';
 import styled from 'styled-components';
 import {NavLink} from 'react-router-dom';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faUserCog} from '@fortawesome/free-solid-svg-icons';
 import logo from '../img/synth2.svg';
+import useWindowDimensions from '../hooks/useWindowDimensions';
 
 const Navigation = () => {
+  const {width} = useWindowDimensions();
+
+  const [visibility, setVisibility] = useState(false);
+
+  const visibilityToggler = () => {
+    setVisibility(!visibility);
+    visibility.toString();
+  };
+
+  useEffect(() => {
+    if (width > 768) {
+      setVisibility(false);
+    }
+  }, [width]);
+
   return (
-    <NavigationContainer>
-      <NavigationBar>
-        <StyledLogoContainer>
+    <NavigationContainer className='navigation-container'>
+      <StyledLogoContainer>
+        <StyledLink to={'/'}>
           <StyledImage src={logo} />
-        </StyledLogoContainer>
-        <StyledNavLinkContainer>
-          <StyledLink>
-            <NavLink
-              style={{textDecoration: 'none', color: 'white'}}
-              to={'/contribute'}
-            >
-              Contribute
-            </NavLink>
+        </StyledLink>
+      </StyledLogoContainer>
+      <Burger className='burger' onClick={visibilityToggler}>
+        <Line1 />
+        <Line2 />
+        <Line3 />
+      </Burger>
+      <StyledNavLinkContainer
+        className='nav-links'
+        visibility={visibility ? 1 : 0}
+      >
+        <StyledLinkWrapper>
+          <StyledLink exact to={'/'}>
+            Home
           </StyledLink>
-          <StyledLink>
-            <NavLink
-              style={{textDecoration: 'none', color: 'white'}}
-              to={'/admins'}
-            >
-              Register
-            </NavLink>
+        </StyledLinkWrapper>
+        <StyledLinkWrapper>
+          <StyledLink to={'/contribute'}>Contribute</StyledLink>
+        </StyledLinkWrapper>
+        <StyledLinkWrapper>
+          <StyledLink to={'/admins'}>Register</StyledLink>
+        </StyledLinkWrapper>
+        <StyledLinkWrapper>
+          <StyledLink to={'/suggestions'}>
+            <FontAwesomeIcon icon={faUserCog} size='lg' transform='' />
           </StyledLink>
-          <StyledLink>
-            <NavLink style={{textDecoration: 'none', color: 'white'}} to={'/'}>
-              Home
-            </NavLink>
-          </StyledLink>
-          <StyledLink>
-            <NavLink style={{color: 'white'}} to={'/suggestions'}>
-              <FontAwesomeIcon icon={faUserCog} size='lg' transform='' />
-            </NavLink>
-          </StyledLink>
-        </StyledNavLinkContainer>
-      </NavigationBar>
+        </StyledLinkWrapper>
+      </StyledNavLinkContainer>
     </NavigationContainer>
   );
 };
 
+const activeClassName = 'nav-item-active';
+
+const StyledLinkWrapper = styled.div`
+  margin-right: 2rem;
+  margin-bottom: 0px;
+  @media (max-width: 768px) {
+    margin-right: 0px;
+    margin-bottom: 1rem;
+  }
+`;
+
+const StyledLink = styled(NavLink).attrs({activeClassName})`
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: white;
+  text-decoration: none;
+  text-transform: uppercase;
+  cursor: pointer;
+  &.${activeClassName} {
+    color: var(--primary);
+  }
+`;
+
+const Burger = styled.div`
+  margin-bottom: 1.5rem;
+  cursor: pointer;
+  display: none;
+  @media (max-width: 768px) {
+    display: block;
+  }
+`;
+
+const Line1 = styled.div`
+  margin: 3px;
+  width: 20px;
+  height: 3px;
+  background-color: white;
+`;
+
+const Line2 = styled.div`
+  margin: 3px;
+  width: 20px;
+  height: 3px;
+  background-color: white;
+`;
+
+const Line3 = styled.div`
+  margin: 3px;
+  width: 20px;
+  height: 3px;
+  background-color: white;
+`;
+
 const StyledImage = styled.img`
-  margin-top: 20px;
-  margin-left: 30px;
-  width: 80px;
-  height: 80px;
+  width: 70px;
+  height: 70px;
 `;
 
 const NavigationContainer = styled.div`
-  position: sticky;
-  top: 0;
   width: 100%;
-  z-index: 2;
+  min-height: 8vh;
+  background-color: var(--dark-grey);
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
 `;
 
 const StyledLogoContainer = styled.div`
-  z-index: 3;
-  width: 50%;
-`;
-
-const StyledLogoSvg = styled.svg`
-  height: 100%;
-  width: 100%;
-  z-index: 4;
+  margin-top: 1rem;
+  display: flex;
+  justify-content: flex-start;
+  margin-left: 2rem;
+  @media (max-width: 768px) {
+    margin-left: 0px;
+  }
 `;
 
 const StyledNavLinkContainer = styled.div`
   width: 50%;
   display: flex;
-  justify-content: center;
-  align-items: top;
-`;
-
-const StyledLink = styled.p`
-  text-decoration: none;
-  margin-right: 3rem;
-  transition: all 0.3 ease 0s;
-  &:hover {
-    color: purple;
-  }
-`;
-
-const NavigationBar = styled.div`
-  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
   align-items: center;
-  background-color: #282828;
-  height: 50px;
-  width: 100%;
+  @media (max-width: 1024px) {
+    width: 75%;
+  }
+  @media (max-width: 768px) {
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+  }
+  /* display: 'none'; */
+  display: ${({visibility}) => (visibility ? 'none' : 'flex')};
 `;
 
 export default Navigation;

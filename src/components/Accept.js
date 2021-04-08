@@ -3,8 +3,6 @@ import useFetchSuggestions from '../hooks/useFetchSuggestions';
 import Suggestion from './Suggestion';
 import styled from 'styled-components';
 
-import {Redirect} from 'react-router-dom';
-
 const Form = () => {
   const {suggestions, loading, accept, decline, error} = useFetchSuggestions();
   return (
@@ -26,15 +24,6 @@ const Form = () => {
     </>
   );
 };
-
-const AttentionCard = styled.div`
-  text-align: center;
-  width: 100vw;
-  height: 100vh;
-  display: grid;
-  align-items: center;
-  background: white;
-`;
 
 const SuggestionContainer = styled.div`
   margin: 1rem;

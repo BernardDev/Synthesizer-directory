@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const StyledButton = styled.input`
   box-sizing: border-box;
-  background: blue;
+  background: var(--primary);
   color: white;
   text-transform: uppercase;
   border: none;

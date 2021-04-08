@@ -1,5 +1,4 @@
 import axios from 'axios';
-import useToken from '../context/store';
 
 const declineSuggestion = async (id, token) => {
   try {
