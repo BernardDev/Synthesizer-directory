@@ -26,7 +26,7 @@ On the main page images pop-up from both sides with [CSS Animations](#). When th
 
 <br>
 
-> [STYLED COMPONETNS](https://github.com/BernardDev/Synthesizer-directory) <br>
+> [STYLED COMPONENTS](https://github.com/BernardDev/Synthesizer-directory) <br>
 
 Making this frontend gave me the chance of exploring more tools in my styling toolbox. Since I am working in React, [Styled Components](#) seemed fitting. It blends in so well with React's inner working and is nice to combine with Sass.
 
