@@ -14,7 +14,6 @@ const Navigation = () => {
 
   const visibilityToggler = () => {
     setVisibility(!visibility);
-    visibility.toString();
   };
 
   useEffect(() => {
@@ -37,7 +36,7 @@ const Navigation = () => {
       </Burger>
       <StyledNavLinkContainer
         className='nav-links'
-        visibility={visibility ? 1 : 0}
+        visibility={visibility.toString()}
       >
         <StyledLinkWrapper>
           <StyledLink exact to={'/'}>
@@ -60,8 +59,6 @@ const Navigation = () => {
   );
 };
 
-const activeClassName = 'nav-item-active';
-
 const StyledLinkWrapper = styled.div`
   margin-right: 2rem;
   margin-bottom: 0px;
@@ -70,6 +67,7 @@ const StyledLinkWrapper = styled.div`
     margin-bottom: 1rem;
   }
 `;
+const activeClassName = 'nav-item-active';
 
 const StyledLink = styled(NavLink).attrs({activeClassName})`
   font-size: 0.8rem;
@@ -155,7 +153,7 @@ const StyledNavLinkContainer = styled.div`
     width: 100%;
   }
   /* display: 'none'; */
-  display: ${({visibility}) => (visibility ? 'none' : 'flex')};
+  display: ${({visibility}) => (visibility === 'true' ? 'none' : 'flex')};
 `;
 
 export default Navigation;
