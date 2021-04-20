@@ -51,11 +51,11 @@ const Homepage = () => {
           handleSearch={handleSearch}
           manufacturers={manufacturers}
         />
-        <Options
+        {/* <Options
           query={query}
           handleSearch={handleSearch}
           manufacturers={manufacturers}
-        />
+        /> */}
       </StickyContainer>
       {error ? (
         <Frame>

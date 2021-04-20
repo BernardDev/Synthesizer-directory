@@ -1,5 +1,5 @@
 import './navigation.scss';
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useCallback, useMemo} from 'react';
 import styled from 'styled-components';
 import {NavLink} from 'react-router-dom';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
@@ -10,33 +10,57 @@ import useWindowDimensions from '../hooks/useWindowDimensions';
 const Navigation = () => {
   const {width} = useWindowDimensions();
 
-  const [visibility, setVisibility] = useState(false);
+  const [visibilityBurger, setVisibilityBurger] = useState(false);
+  const [visibility, setVisibility] = useState(true);
+  console.log('visibility', visibility);
+  const [scrollPositionY, setScrollPositionY] = useState(window.scrollY);
 
-  const visibilityToggler = () => {
-    setVisibility(!visibility);
+  const handleNavigation = useCallback(
+    (e) => {
+      const window = e.currentTarget;
+      if (scrollPositionY > window.scrollY) {
+        setVisibility(true);
+      } else if (scrollPositionY < window.scrollY) {
+        setVisibility(false);
+      }
+      setScrollPositionY(window.scrollY);
+    },
+    [scrollPositionY]
+  );
+
+  useEffect(() => {
+    setScrollPositionY(window.scrollY);
+    window.addEventListener('scroll', handleNavigation);
+    return () => {
+      window.removeEventListener('scroll', handleNavigation);
+    };
+  }, [handleNavigation]);
+
+  const visibilityBurgerToggler = () => {
+    setVisibilityBurger(!visibilityBurger);
   };
 
   useEffect(() => {
     if (width > 768) {
-      setVisibility(false);
+      setVisibilityBurger(false);
     }
   }, [width]);
 
   return (
-    <NavigationContainer className='navigation-container'>
+    <NavigationContainer visibility={visibility.toString()} className=''>
       <StyledLogoContainer>
         <StyledLink to={'/'}>
           <StyledImage src={logo} />
         </StyledLink>
       </StyledLogoContainer>
-      <Burger className='burger' onClick={visibilityToggler}>
+      <Burger className='burger' onClick={visibilityBurgerToggler}>
         <Line1 />
         <Line2 />
         <Line3 />
       </Burger>
       <StyledNavLinkContainer
         className='nav-links'
-        visibility={visibility.toString()}
+        visibility={visibilityBurger.toString()}
       >
         <StyledLinkWrapper>
           <StyledLink exact to={'/'}>
@@ -117,14 +141,16 @@ const StyledImage = styled.img`
 `;
 
 const NavigationContainer = styled.div`
-  width: 100%;
   min-height: 8vh;
-  background-color: var(--dark-grey);
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
+  display: fixed;
+  background-color: ${(props) =>
+    props.visibility === 'true' ? 'red' : 'green'};
+  left: 0;
+  top: 0;
+  width: 100%;
+  transition: top 0.6s;
   @media (max-width: 768px) {
-    flex-direction: column;
+    /* flex-direction: column; */
   }
 `;
 
