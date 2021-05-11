@@ -5,12 +5,12 @@ import Form from '../components/Form';
 
 const Contribute = () => {
   return (
-    <StyledContributePage>
-      <StickyContainer>
-        <Navigation />
-      </StickyContainer>
-      <Form />
-    </StyledContributePage>
+    <>
+      {/* <Navigation /> */}
+      <StyledContributePage>
+        <Form />
+      </StyledContributePage>
+    </>
   );
 };
 

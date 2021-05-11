@@ -1,10 +1,13 @@
 import {useState, useEffect} from 'react';
 
 function getWindowDimensions() {
-  const {innerWidth: width, innerHeight: height} = window;
+  if (window.innerWidth < 768) {
+    return {
+      width: 200,
+    };
+  }
   return {
-    width,
-    height,
+    width: 769,
   };
 }
 
@@ -21,6 +24,5 @@ export default function useWindowDimensions() {
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
   }, []);
-
   return windowDimensions;
 }

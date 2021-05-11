@@ -5,10 +5,12 @@ import Accept from '../components/Accept';
 
 const Admin = () => {
   return (
-    <StyledAdminPage>
-      <Navigation />
-      <Accept />
-    </StyledAdminPage>
+    <>
+      {/* <Navigation /> */}
+      <StyledAdminPage>
+        <Accept />
+      </StyledAdminPage>
+    </>
   );
 };
 

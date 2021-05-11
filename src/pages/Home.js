@@ -44,51 +44,81 @@ const Homepage = () => {
   );
 
   return (
-    <Home>
-      <StickyContainer>
-        <Navigation
-          query={query}
-          handleSearch={handleSearch}
-          manufacturers={manufacturers}
-        />
-        {/* <Options
+    <ContainerTje>
+      <TimelineNew className='zien' />
+      {/* <Navigation
+        query={query}
+        handleSearch={handleSearch}
+        manufacturers={manufacturers}
+      /> */}
+      <Home>
+        <StickyContainer>
+          {/* <Options
           query={query}
           handleSearch={handleSearch}
           manufacturers={manufacturers}
         /> */}
-      </StickyContainer>
-      {error ? (
-        <Frame>
-          <Feedback loading={loading} error={error} />
-        </Frame>
-      ) : (
-        <>
-          <Timeline>
-            {synths.map((synth, index) => {
-              const isLastSynthesizer = synths.length === index + 1;
-              return isLastSynthesizer ? (
-                <Synth
-                  key={index}
-                  synth={synth}
-                  index={index}
-                  reference={paginationTrigger}
-                  loading={loading ? 1 : 0}
-                />
-              ) : (
-                <Synth key={index} synth={synth} index={index} />
-              );
-            })}
-          </Timeline>
-          {loading && (
-            <Frame>
-              <Spinner width={400} loading={loading ? 1 : 0} />{' '}
-            </Frame>
-          )}
-        </>
-      )}
-    </Home>
+        </StickyContainer>
+        {error ? (
+          <Frame>
+            <Feedback loading={loading} error={error} />
+          </Frame>
+        ) : (
+          <>
+            <Timeline>
+              {synths.map((synth, index) => {
+                const isLastSynthesizer = synths.length === index + 1;
+                return isLastSynthesizer ? (
+                  <Synth
+                    key={index}
+                    synth={synth}
+                    index={index}
+                    reference={paginationTrigger}
+                    loading={loading ? 1 : 0}
+                  />
+                ) : (
+                  <Synth key={index} synth={synth} index={index} />
+                );
+              })}
+            </Timeline>
+            {loading && (
+              <Frame>
+                <Spinner width={400} loading={loading ? 1 : 0} />{' '}
+              </Frame>
+            )}
+          </>
+        )}
+      </Home>
+    </ContainerTje>
   );
 };
+
+const ContainerTje = styled.div`
+  width: 100%;
+  height: 100%;
+  margin: 0 auto;
+  /* border: 1px solid red; */
+`;
+
+// margin: 0 8rem;
+// height: 100%;
+// position: absolute;
+// width: 4px;
+// background: #000;
+
+const TimelineNew = styled.div`
+  /* margin: 0 8rem; */
+  height: 100%;
+  /* width: 100%; */
+  top: 0;
+  left: 50%;
+  display: block;
+  position: absolute;
+  /* margin: 0 auto; */
+  /* transform: translateX(-50%); */
+  width: 4px;
+  background: #000;
+`;
 
 const StickyContainer = styled.div`
   position: -webkit-sticky;

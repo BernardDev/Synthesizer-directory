@@ -12,18 +12,15 @@ const Timeline = (props) => {
   );
 };
 
-const TimelineContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  position: relative;
-  padding: 0;
-`;
+const TimelineContainer = styled.div``;
 
 const Line = styled.div`
-  margin: 0 8rem;
+  /* margin: 0 8rem; */
   height: 100%;
   position: absolute;
+  top: 0;
+  left: 50%;
+  /* transform: translateX(); */
   width: 4px;
   background: #000;
 `;

@@ -25,7 +25,7 @@ const Register = () => {
       setResponse(res.data.message);
     } catch (error) {
       setResponse(error.response.statusText);
-      console.log(`error`, error);
+      // console.log(`error`, error);
     }
   };
 
