@@ -1,13 +1,11 @@
 import React, {useState, useRef, useCallback} from 'react';
 import useFetchSynths from '../hooks/useFetchSynths';
-import Navigation from '../components/Navigation';
 import Timeline from '../components/Timeline';
 import Synth from '../components/Synth';
 import Feedback from '../components/Feedback';
 import Spinner from '../components/Spinner';
 import styled from 'styled-components';
 import useFetchManufacturers from '../hooks/useFetchManufacturers';
-import Options from '../components/Options';
 
 const Homepage = () => {
   const [page, setPage] = useState(0);
@@ -19,10 +17,10 @@ const Homepage = () => {
     manufacturers
   );
 
-  const handleSearch = (e) => {
-    setQuery(e.target.value);
-    setPage(0);
-  };
+  // const handleSearch = (e) => {
+  //   setQuery(e.target.value);
+  //   setPage(0);
+  // };
 
   const observer = useRef();
 

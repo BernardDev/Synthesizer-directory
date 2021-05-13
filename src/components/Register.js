@@ -14,7 +14,6 @@ const Register = () => {
   });
 
   const onSubmit = async (data) => {
-    // console.log(errors);
     // console.log(`data`, data);
     setResponse('');
     try {
