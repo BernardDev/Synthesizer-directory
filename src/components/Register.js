@@ -14,7 +14,6 @@ const Register = () => {
   });
 
   const onSubmit = async (data) => {
-    // console.log(errors);
     // console.log(`data`, data);
     setResponse('');
     try {
@@ -25,7 +24,7 @@ const Register = () => {
       setResponse(res.data.message);
     } catch (error) {
       setResponse(error.response.statusText);
-      console.log(`error`, error);
+      // console.log(`error`, error);
     }
   };
 
