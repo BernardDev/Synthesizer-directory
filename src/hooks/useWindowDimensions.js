@@ -1,10 +1,13 @@
 import {useState, useEffect} from 'react';
 
 function getWindowDimensions() {
-  const {innerWidth: width, innerHeight: height} = window;
+  if (window.innerWidth < 768) {
+    return {
+      width: 200,
+    };
+  }
   return {
-    width,
-    height,
+    width: 769,
   };
 }
 
@@ -15,12 +18,13 @@ export default function useWindowDimensions() {
 
   useEffect(() => {
     function handleResize() {
+      const resize = getWindowDimensions();
+      if (resize.width === windowDimensions.width) return;
       setWindowDimensions(getWindowDimensions());
     }
 
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
-  }, []);
-
+  }, [windowDimensions.width]);
   return windowDimensions;
 }
