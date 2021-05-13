@@ -1,7 +1,7 @@
 import './styles/navigation.scss';
 import React from 'react';
 import useWindowDimensions from '../../hooks/useWindowDimensions';
-import styled, {css, keyframes} from 'styled-components';
+import styled from 'styled-components';
 
 import MenuMobile from './MenuMobile';
 import MenuDesktop from './MenuDesktop';

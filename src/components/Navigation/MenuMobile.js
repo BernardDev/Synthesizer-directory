@@ -1,4 +1,4 @@
-import styled, {css, keyframes} from 'styled-components';
+import styled from 'styled-components';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faUserCog} from '@fortawesome/free-solid-svg-icons';
 import {NavLink} from 'react-router-dom';
