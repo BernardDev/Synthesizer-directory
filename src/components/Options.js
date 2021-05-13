@@ -30,6 +30,7 @@ const OptionsContainer = styled.div`
   background: green;
   display: flex;
   justify-content: center;
+  display: none;
   padding: 0.5rem;
   background-color: var(--grey);
 `;

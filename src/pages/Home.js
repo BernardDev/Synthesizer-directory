@@ -7,6 +7,8 @@ import Spinner from '../components/Spinner';
 import styled from 'styled-components';
 import useFetchManufacturers from '../hooks/useFetchManufacturers';
 
+import Options from '../components/Options';
+
 const Homepage = () => {
   const [page, setPage] = useState(0);
   const [query, setQuery] = useState();
@@ -17,10 +19,10 @@ const Homepage = () => {
     manufacturers
   );
 
-  // const handleSearch = (e) => {
-  //   setQuery(e.target.value);
-  //   setPage(0);
-  // };
+  const handleSearch = (e) => {
+    setQuery(e.target.value);
+    setPage(0);
+  };
 
   const observer = useRef();
 
@@ -44,18 +46,13 @@ const Homepage = () => {
   return (
     <ContainerTje>
       <TimelineNew className='zien' />
-      {/* <Navigation
-        query={query}
-        handleSearch={handleSearch}
-        manufacturers={manufacturers}
-      /> */}
       <Home>
         <StickyContainer>
-          {/* <Options
-          query={query}
-          handleSearch={handleSearch}
-          manufacturers={manufacturers}
-        /> */}
+          <Options
+            query={query}
+            handleSearch={handleSearch}
+            manufacturers={manufacturers}
+          />
         </StickyContainer>
         {error ? (
           <Frame>
