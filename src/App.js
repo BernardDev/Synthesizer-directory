@@ -41,6 +41,7 @@ const Spacer = styled.div`
 
 const Container = styled.div`
   margin: 0 auto;
+  overflow: hidden;
 `;
 
 export default App;
