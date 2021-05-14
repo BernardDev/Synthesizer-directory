@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import logo from '../../img/synth2.svg';
+import logo from '../../img/synth3.svg';
 import {NavLink} from 'react-router-dom';
 
 const Logo = () => {
@@ -33,8 +33,8 @@ const StyledLogoContainer = styled.div`
 `;
 
 const StyledImage = styled.img`
-  width: 70px;
-  height: 70px;
+  width: 80px;
+  height: 80px;
 `;
 
 export default Logo;
