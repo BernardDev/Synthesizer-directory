@@ -7,7 +7,7 @@ const Synth = ({reference, synth, index}) => {
 
   const animationTrigger = useCallback((node) => {
     const options = {
-      threshold: 1,
+      threshold: 0.25,
     };
     const observer = new IntersectionObserver(([lastElementOnPage]) => {
       if (lastElementOnPage.isIntersecting) {
@@ -124,7 +124,7 @@ const SynthContainer = styled.div`
 
 const Img = styled.img`
   height: auto;
-  width: 100%;
+  width: 85%;
 `;
 
 export default Synth;
